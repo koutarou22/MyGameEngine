@@ -6,8 +6,8 @@
 
 namespace Direct3D
 {
-	const int WINDOW_WIDTH = 800;  //ウィンドウの幅
-    const int WINDOW_HEIGHT = 600; //ウィンドウの高さ
+	//const int WINDOW_WIDTH = 800;  //ウィンドウの幅
+ //   const int WINDOW_HEIGHT = 600; //ウィンドウの高さ
 
 
 	//初期化

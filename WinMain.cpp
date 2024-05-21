@@ -5,8 +5,8 @@ using namespace Direct3D;
 
 const wchar_t * WIN_CLASS_NAME = L"SampleGame";
 const wchar_t* APP_NAME = L"Hello Windows!!";
-//const int WINDOW_WIDTH = 800;  //ウィンドウの幅
-//const int WINDOW_HEIGHT = 600; //ウィンドウの高さ
+const int WINDOW_WIDTH = 800;  //ウィンドウの幅
+const int WINDOW_HEIGHT = 600; //ウィンドウの高さ
 
 //プロトタイプ宣言
 LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);

@@ -23,11 +23,11 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <FxCompile Include="simple3D.hlsl" />
+  </ItemGroup>
+  <ItemGroup>
     <ClInclude Include="Direct3D.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <FxCompile Include="simple3D.hlsl" />
   </ItemGroup>
 </Project>
