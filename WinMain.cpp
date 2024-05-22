@@ -1,10 +1,12 @@
 #include <Windows.h>
 #include<tchar.h>
 #include "Direct3D.h"
+#include "Quad.h"
+
 using namespace Direct3D;
 
 const wchar_t * WIN_CLASS_NAME = L"SampleGame";
-const wchar_t* APP_NAME = L"Hello Windows!!";
+const wchar_t* APP_NAME = L"Error";
 const int WINDOW_WIDTH = 800;  //ウィンドウの幅
 const int WINDOW_HEIGHT = 600; //ウィンドウの高さ
 
@@ -55,6 +57,9 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, 
 
     //Direct3D初期化
     Direct3D::Initialize(winW, winH, hWnd);
+    Quad* q = new Quad;
+    q->Initialize();
+
 
     MSG msg;
     ZeroMemory(&msg, sizeof(msg));
@@ -73,12 +78,17 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, 
             //ゲームの処理
             Direct3D::BeginDraw();
 
+            //ここに自前の描画処理を追加していく
+            q->Draw();
+            
+
             //描画処理
             Direct3D::EndDraw();
         }
     }
 
     Direct3D::Release();
+    q->Release();
 
 	return 0;
 }
