@@ -1,4 +1,6 @@
 #pragma once
+#define SAFE_DELETE(p) if(p != nullptr){ delete p; p = nullptr;}
+#define SAFE_RELEASE(p) if(p != nullptr){ p->Release(); p = nullptr;}
 #include <d3d11.h>
 
 //リンカ
@@ -11,10 +13,10 @@ namespace Direct3D
 	extern ID3D11DeviceContext* pContext;
 
 	//初期化
-	void Initialize(int winW, int winH, HWND hWnd);
+	HRESULT Initialize(int winW, int winH, HWND hWnd);
 
 	//シェーダー準備
-	void InitShader();
+	HRESULT InitShader();
 
 	//描画開始
 	void BeginDraw();

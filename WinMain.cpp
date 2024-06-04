@@ -13,7 +13,6 @@ const int WINDOW_HEIGHT = 600; //ウィンドウの高さ
 //プロトタイプ宣言
 LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
-
 //エントリーポイント
 int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, int nCmdShow)
 {
@@ -55,11 +54,17 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, 
 
     ShowWindow(hWnd, nCmdShow);
 
+
     //Direct3D初期化
-    Direct3D::Initialize(winW, winH, hWnd);
+   HRESULT hr =  Direct3D::Initialize(winW, winH, hWnd);
     Quad* q = new Quad;
     q->Initialize();
 
+    if (FAILED(hr))
+    {
+        MessageBox(NULL, L"Direct3Dの初期化に失敗しました", L"Error", NULL);
+        return hr;
+    }
 
     MSG msg;
     ZeroMemory(&msg, sizeof(msg));
@@ -87,8 +92,8 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, 
         }
     }
 
+    SAFE_DELETE(q);
     Direct3D::Release();
-    q->Release();
 
 	return 0;
 }
