@@ -2,6 +2,7 @@
 #include<tchar.h>
 #include "Direct3D.h"
 #include "Quad.h"
+#include "Camera.h"
 
 using namespace Direct3D;
 
@@ -57,6 +58,8 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, 
 
     //Direct3D‰Šú‰»
    HRESULT hr =  Direct3D::Initialize(winW, winH, hWnd);
+   Camera::Initialize();
+
     Quad* q = new Quad;
     q->Initialize();
 
@@ -80,14 +83,29 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, 
         //ƒƒbƒZ[ƒW‚È‚µ
         else
         {
+            //ƒJƒƒ‰‚ðXV
+            Camera::Update();
             //ƒQ[ƒ€‚Ìˆ—
             Direct3D::BeginDraw();
 
-            //‚±‚±‚ÉŽ©‘O‚Ì•`‰æˆ—‚ð’Ç‰Á‚µ‚Ä‚¢‚­
-            q->Draw();
-            
-
+            static float rot = 0;
+            rot+= 0.25;
             //•`‰æˆ—
+            XMMATRIX rmat = XMMatrixRotationY(XMConvertToRadians((float)rot));
+            static float factor = 0.0f;
+            factor += 0.01;
+            float scale = 1.5 + sin(factor);
+            XMMATRIX smat = XMMatrixScaling(scale, scale, scale);
+
+            XMMATRIX mat = /*smat **/ rmat;
+
+
+            
+            //‚±‚±‚ÉŽ©‘O‚Ì•`‰æˆ—‚ð’Ç‰Á‚µ‚Ä‚¢‚­
+            //•`‰æˆ—
+            q -> Draw(mat);
+            
+            
             Direct3D::EndDraw();
         }
     }
