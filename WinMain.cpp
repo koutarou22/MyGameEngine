@@ -89,12 +89,12 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, 
             Direct3D::BeginDraw();
 
             static float rot = 0;
-            rot+= 0.25;
+            rot+= 0.02;
             //ï`âÊèàóù
             XMMATRIX rmat = XMMatrixRotationY(XMConvertToRadians((float)rot));
 
             static float factor = 0.0f;
-            factor += 0.01;
+            factor += 0.001;
             //float scale = 1.5 + sin(factor);
             //XMMATRIX smat = XMMatrixScaling(scale, scale, scale);
 

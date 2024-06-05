@@ -149,8 +149,9 @@ HRESULT Direct3D::InitShader()
     //頂点インプットレイアウト
     D3D11_INPUT_ELEMENT_DESC layout[] = {
         { "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0,  D3D11_INPUT_PER_VERTEX_DATA, 0 },	//位置
+        { "TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, 0, sizeof(XMVECTOR) , D3D11_INPUT_PER_VERTEX_DATA, 0 },//UV座標
     };
-    hr = pDevice->CreateInputLayout(layout, 1, pCompileVS->GetBufferPointer(), pCompileVS->GetBufferSize(), &pVertexLayout);
+    hr = pDevice->CreateInputLayout(layout, 2, pCompileVS->GetBufferPointer(), pCompileVS->GetBufferSize(), &pVertexLayout);
     /*hr = E_FAIL;*/
     if (FAILED(hr))
     {
@@ -175,8 +176,8 @@ HRESULT Direct3D::InitShader()
 
     //ラスタライザ作成
     D3D11_RASTERIZER_DESC rdc = {};
-    rdc.CullMode = D3D11_CULL_BACK;//多角形の裏側は表示しない『カリング』
-    rdc.FillMode = D3D11_FILL_WIREFRAME;//多角形の内部を塗りつぶす D3D11_FILL_SOLID //ここでワイヤーフレーム化 D3D11_FILL_WIREFRAME
+    rdc.CullMode = D3D11_CULL_NONE;//多角形の裏側は表示しない『カリング』
+    rdc.FillMode = D3D11_FILL_SOLID;//多角形の内部を塗りつぶす D3D11_FILL_SOLID //ここでワイヤーフレーム化 D3D11_FILL_WIREFRAME
     rdc.FrontCounterClockwise = FALSE;//反時計回りを『表』にするどうか(がfalseなので時計回りが表)
     hr = pDevice->CreateRasterizerState(&rdc, &pRasterizerState);
     /*hr = E_FAIL;*/
