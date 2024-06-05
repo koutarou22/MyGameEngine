@@ -92,15 +92,20 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, 
             rot+= 0.25;
             //•`‰æˆ—
             XMMATRIX rmat = XMMatrixRotationY(XMConvertToRadians((float)rot));
+
             static float factor = 0.0f;
             factor += 0.01;
-            float scale = 1.5 + sin(factor);
-            XMMATRIX smat = XMMatrixScaling(scale, scale, scale);
+            //float scale = 1.5 + sin(factor);
+            //XMMATRIX smat = XMMatrixScaling(scale, scale, scale);
 
-            XMMATRIX mat = /*smat **/ rmat;
+            //XMMATRIX mat = smat * rmat;
 
+            //’PˆÊs—ñ‚ÍA”Žš‚Ì‚P‚Æ“¯‚¶
+            XMMATRIX mat = XMMatrixIdentity();
 
+            XMMATRIX tmat = XMMatrixTranslation(2.0*cos(factor),sin(factor), 0);
             
+            mat = rmat * tmat;
             //‚±‚±‚ÉŽ©‘O‚Ì•`‰æˆ—‚ð’Ç‰Á‚µ‚Ä‚¢‚­
             //•`‰æˆ—
             q -> Draw(mat);
