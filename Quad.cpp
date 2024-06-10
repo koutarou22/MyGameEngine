@@ -44,10 +44,15 @@ HRESULT Quad::Initialize()
 	// 頂点情報
 	VERTEX vertices[] =
 	{
-		{ XMVectorSet(-1.0f,  1.0f, 0.0f, 0.0f),{ 0.0f, 0.0f, 0.0f, 0.0f}},   // 四角形の頂点（左上）
-		{ XMVectorSet(1.0f,  1.0f, 0.0f, 0.0f), { 1.0f, 0.0f, 0.0f, 0.0f}},   // 四角形の頂点（右上）
-		{ XMVectorSet(1.0f, -1.0f, 0.0f, 0.0f), { 1.0f, 1.0f, 0.0f, 0.0f}},   // 四角形の頂点（右下）
-		{ XMVectorSet(-1.0f, -1.0f, 0.0f, 0.0f),{ 0.0f, 1.0f, 0.0f, 0.0f}},   // 四角形の頂点（左下）
+		{ XMVectorSet(-1.0f,  1.0f, 0.0f, 0.0f),{ 0.0f, 0.0f, 0.0f, 0.0f}},   // 四角形の頂点（左上）0
+		{ XMVectorSet(1.0f,  1.0f, 0.0f, 0.0f), { 1.0f, 0.0f, 0.0f, 0.0f}},   // 四角形の頂点（右上）1
+		{ XMVectorSet(1.0f, -1.0f, 0.0f, 0.0f), { 1.0f, 1.0f, 0.0f, 0.0f}},   // 四角形の頂点（右下）2
+		{ XMVectorSet(-1.0f, -1.0f, 0.0f, 0.0f),{ 0.0f, 1.0f, 0.0f, 0.0f}},   // 四角形の頂点（左下）3
+		 { XMVectorSet(-1.0f,  1.0f, -2.0f, 0.0f), { 0.0f, 0.0f, 0.0f, 0.0f}},   // 四角形の頂点（奥左上）4
+		 { XMVectorSet( 1.0f,  1.0f, -2.0f, 0.0f), { 1.0f, 0.0f, 0.0f, 0.0f}},   // 四角形の頂点（奥右上）5
+		 { XMVectorSet( 1.0f, -1.0f, -2.0f, 0.0f), { 1.0f, 1.0f, 0.0f, 0.0f}},   // 四角形の頂点（奥右下）6
+		 { XMVectorSet(-1.0f, -1.0f, -2.0f, 0.0f), { 0.0f, 1.0f, 0.0f, 0.0f}},   // 四角形の頂点（奥左下）7
+
 	};
 	// 頂点データ用バッファの設定
 	D3D11_BUFFER_DESC bd_vertex;
@@ -76,7 +81,9 @@ HRESULT Quad::Initialize()
 
 	//インデックス情報　四角錐
 	//int index[] = { 0,1,2, 0,2,3, 1,2,4, 2,3,4, 0,1,4};
-	int index[] = {4,1,3, 4,0,3, 0,1,4, 0,1,2, 0,2,3, 2,1,3};
+	//int index[] = {4,1,3, 4,0,3, 0,1,4, 0,1,2, 0,2,3, 2,1,3,};
+	//int index[] = { 0,1,2, 0,2,3, 0,4,1, 4,6,7, 4,5,1, 3,6,2, 3,7,6, 4,7,0, 1,5,6,  };
+	int index[] = {0,1,2, 0,2,3, 1,5,6 ,1,6,2, 5,4,6, 5,6,7, 4,0,3, 4,3,7, 4,5,1, 4,1,0, 7,6,2, 7,2,3 };
 	// インデックスバッファを生成する
 	D3D11_BUFFER_DESC   bd;
 	bd.Usage = D3D11_USAGE_DEFAULT;
@@ -117,7 +124,7 @@ HRESULT Quad::Initialize()
 	}
 
 	pTexture_ = new Texture;
-	pTexture_->Load("Assets\\thumbnail.png");
+	//pTexture_->Load("Assets\\Dies.jpg");
 
 	return S_OK;
 }
@@ -157,7 +164,7 @@ void Quad::Draw(XMMATRIX& worldMatrix)
 	Direct3D::pContext->VSSetConstantBuffers(0, 1, &pConstantBuffer_);	//頂点シェーダー用	
 	Direct3D::pContext->PSSetConstantBuffers(0, 1, &pConstantBuffer_);	//ピクセルシェーダー用
 
-	Direct3D::pContext->DrawIndexed(18, 0, 0);//三角化した時の頂点の数
+	Direct3D::pContext->DrawIndexed(36, 0, 0);//三角化した時の頂点の数
 }
 
 void Quad::Release()
