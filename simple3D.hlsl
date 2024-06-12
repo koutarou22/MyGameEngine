@@ -46,5 +46,6 @@ VS_OUT VS(float4 pos : POSITION, float4 uv : TEXCOORD)
 //„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ
 float4 PS(VS_OUT inData) : SV_Target
 {
+   // float4 myUV = { 0.125, 0.25, 0, 0 };
     return g_texture.Sample(g_sampler, inData.uv);
 }

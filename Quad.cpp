@@ -44,16 +44,38 @@ HRESULT Quad::Initialize()
 	// 頂点情報
 	VERTEX vertices[] =
 	{
-		{ XMVectorSet(-1.0f,  1.0f, 0.0f, 0.0f),{ 0.0f, 0.0f, 0.0f, 0.0f}},   // 四角形の頂点（左上）0
-		{ XMVectorSet(1.0f,  1.0f, 0.0f, 0.0f), { 1.0f, 0.0f, 0.0f, 0.0f}},   // 四角形の頂点（右上）1
-		{ XMVectorSet(1.0f, -1.0f, 0.0f, 0.0f), { 1.0f, 1.0f, 0.0f, 0.0f}},   // 四角形の頂点（右下）2
-		{ XMVectorSet(-1.0f, -1.0f, 0.0f, 0.0f),{ 0.0f, 1.0f, 0.0f, 0.0f}},   // 四角形の頂点（左下）3
-		 { XMVectorSet(-1.0f,  1.0f, -2.0f, 0.0f), { 0.0f, 0.0f, 0.0f, 0.0f}},   // 四角形の頂点（奥左上）4
-		 { XMVectorSet( 1.0f,  1.0f, -2.0f, 0.0f), { 1.0f, 0.0f, 0.0f, 0.0f}},   // 四角形の頂点（奥右上）5
-		 { XMVectorSet( 1.0f, -1.0f, -2.0f, 0.0f), { 1.0f, 1.0f, 0.0f, 0.0f}},   // 四角形の頂点（奥右下）6
-		 { XMVectorSet(-1.0f, -1.0f, -2.0f, 0.0f), { 0.0f, 1.0f, 0.0f, 0.0f}},   // 四角形の頂点（奥左下）7
-
+		//1
+		{ XMVectorSet(1.0f,  1.0f, 0.0f, 0.0f), XMVectorSet(0.0, 0.0, 0.0, 0.0)},	// 四角形の頂点（左上）, UV
+		{ XMVectorSet(0.0f,  1.0f, 0.0f, 0.0f), XMVectorSet(0.25, 0.0, 0.0, 0.0)},	// 四角形の頂点（右上）, UV
+		{ XMVectorSet(0.0f, 0.0f, 0.0f, 0.0f),  XMVectorSet(0.25, 0.5, 0.0, 0.0)},	// 四角形の頂点（右下）, UV
+		{ XMVectorSet(1.0f, 0.0f, 0.0f, 0.0f), XMVectorSet(0.0, 0.5, 0.0, 0.0)}	,// 四角形の頂点（左下）, UV
+		//2
+		{ XMVectorSet(0.0f,  1.0f, 0.0f, 0.0f), XMVectorSet(0.25, 0.0, 0.0, 0.0) },	// 四角形の頂点（左上）, UV
+		{ XMVectorSet(0.0f,  1.0f, 1.0f, 0.0f), XMVectorSet(0.5, 0.0, 0.0, 0.0)},	// 四角形の頂点（右上）, UV
+		{ XMVectorSet(0.0f, 0.0f, 1.0f, 0.0f),  XMVectorSet(0.5, 0.5, 0.0, 0.0)},	// 四角形の頂点（右下）, UV
+		{ XMVectorSet(0.0f, 0.0f, 0.0f, 0.0f), XMVectorSet(0.25, 0.5, 0.0, 0.0)},	// 四角形の頂点（左下）, UV
+		//3
+		{ XMVectorSet(1.0f,  1.0f, 1.0f, 0.0f), XMVectorSet(0.5, 0.0, 0.0, 0.0) },	// 四角形の頂点（左上）, UV
+		{ XMVectorSet(0.0f,  1.0f, 1.0f, 0.0f), XMVectorSet(0.75, 0.0, 0.0, 0.0)},	// 四角形の頂点（右上）, UV
+		{ XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f),  XMVectorSet(0.75, 0.5, 0.0, 0.0)},	// 四角形の頂点（右下）, UV
+		{ XMVectorSet(1.0f, 1.0f, 0.0f, 0.0f), XMVectorSet(0.5, 0.5, 0.0, 0.0)},	// 四角形の頂点（左下）, UV
+		//4
+		{ XMVectorSet(1.0f,  0.0f, 0.0f, 0.0f), XMVectorSet(0.75, 0.0, 0.0, 0.0) },	// 四角形の頂点（左上）, UV
+		{ XMVectorSet(0.0f,  0.0f, 0.0f, 0.0f), XMVectorSet(1.0, 0.0, 0.0, 0.0)},	// 四角形の頂点（右上）, UV
+		{ XMVectorSet(0.0f, 0.0f, 1.0f, 0.0f),  XMVectorSet(1.0, 0.5, 0.0, 0.0)},	// 四角形の頂点（右下）, UV
+		{ XMVectorSet(1.0f, 0.0f, 1.0f, 0.0f), XMVectorSet(0.75, 0.5, 0.0, 0.0)},	// 四角形の頂点（左下）, UV
+		//5
+		{ XMVectorSet(1.0f,  1.0f, 1.0f, 0.0f), XMVectorSet(0.0, 0.5, 0.0, 0.0) },	// 四角形の頂点（左上）, UV
+		{ XMVectorSet(1.0f,  1.0f, 0.0f, 0.0f), XMVectorSet(0.25, 0.5, 0.0, 0.0)},	// 四角形の頂点（右上）, UV
+		{ XMVectorSet(1.0f, 0.0f, 0.0f, 0.0f),  XMVectorSet(0.25, 1.0, 0.0, 0.0)},	// 四角形の頂点（右下）, UV
+		{ XMVectorSet(1.0f, 0.0f, 1.0f, 0.0f), XMVectorSet(0.0, 1.0, 0.0, 0.0)},	// 四角形の頂点（左下）, UV
+		//6
+		{ XMVectorSet(0.0f,  1.0f, 1.0f, 0.0f), XMVectorSet(0.25, 0.5, 0.0, 0.0) },	// 四角形の頂点（左上）, UV
+		{ XMVectorSet(1.0f,  1.0f, 1.0f, 0.0f), XMVectorSet(0.5, 0.5, 0.0, 0.0)},	// 四角形の頂点（右上）, UV
+		{ XMVectorSet(1.0f, 0.0f, 1.0f, 0.0f),  XMVectorSet(0.5, 1.0, 0.0, 0.0)},	// 四角形の頂点（右下）, UV
+		{ XMVectorSet(0.0f, 0.0f, 1.0f, 0.0f), XMVectorSet(0.25, 1.0, 0.0, 0.0)},	// 四角形の頂点（左下）, UV
 	};
+
 	// 頂点データ用バッファの設定
 	D3D11_BUFFER_DESC bd_vertex;
 	bd_vertex.ByteWidth = sizeof(vertices);
@@ -83,7 +105,9 @@ HRESULT Quad::Initialize()
 	//int index[] = { 0,1,2, 0,2,3, 1,2,4, 2,3,4, 0,1,4};
 	//int index[] = {4,1,3, 4,0,3, 0,1,4, 0,1,2, 0,2,3, 2,1,3,};
 	//int index[] = { 0,1,2, 0,2,3, 0,4,1, 4,6,7, 4,5,1, 3,6,2, 3,7,6, 4,7,0, 1,5,6,  };
-	int index[] = {0,1,2, 0,2,3, 1,5,6 ,1,6,2, 5,4,6, 5,6,7, 4,0,3, 4,3,7, 4,5,1, 4,1,0, 7,6,2, 7,2,3 };
+	/*int index[] = {0,1,2, 0,2,3, 1,5,6 ,1,6,2, 5,4,6, 5,6,7, 4,0,3, 4,3,7, 4,5,1, 4,1,0, 7,6,2, 7,2,3 };ugoitetayatu*/
+	//int index[] = { 0,1,2, 0,2,3, 1,5,6 ,1,6,2, 4,5,7, 5,6,7, 0,4,3, 4,7,3, 4,5,1, 4,1,0, 7,6,2, 7,2,3 };
+	int index[] = { 0,2,3, 0,1,2,  4,5,6,  4,6,7,  8,9,10, 8,10,11,  12,13,14, 12,14,15,  16,17,18, 16,18,19,    20,21,22, 20,22,23 };
 	// インデックスバッファを生成する
 	D3D11_BUFFER_DESC   bd;
 	bd.Usage = D3D11_USAGE_DEFAULT;
@@ -124,7 +148,7 @@ HRESULT Quad::Initialize()
 	}
 
 	pTexture_ = new Texture;
-	//pTexture_->Load("Assets\\Dies.jpg");
+	pTexture_->Load("Assets\\Dies.jpg");
 
 	return S_OK;
 }
