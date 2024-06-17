@@ -14,6 +14,7 @@ struct VERTEX
 {
 	XMVECTOR position;
 	XMVECTOR uv;
+	XMVECTOR normal;
 };
 
 class Quad
