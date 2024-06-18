@@ -62,35 +62,35 @@ HRESULT Quad::Initialize()
 	};
 	*/
 		//1
-		{ XMVectorSet(1.0f,  1.0f, 0.0f, 0.0f), XMVectorSet(0.0, 0.0, 0.0, 0.0)},	// 四角形の頂点（左上）, UV
-		{ XMVectorSet(0.0f,  1.0f, 0.0f, 0.0f), XMVectorSet(0.25, 0.0, 0.0, 0.0)},	// 四角形の頂点（右上）, UV
-		{ XMVectorSet(0.0f, 0.0f, 0.0f, 0.0f),  XMVectorSet(0.25, 0.5, 0.0, 0.0)},	// 四角形の頂点（右下）, UV
-		{ XMVectorSet(1.0f, 0.0f, 0.0f, 0.0f), XMVectorSet(0.0, 0.5, 0.0, 0.0)}	,// 四角形の頂点（左下）, UV
+		{ XMVectorSet(1.0f,  1.0f, 0.0f, 0.0f), XMVectorSet(0.0, 0.0, 0.0, 0.0), XMVectorSet(0,0,0, -1.0f) },	// 四角形の頂点（左上）, UV
+		{ XMVectorSet(0.0f,  1.0f, 0.0f, 0.0f), XMVectorSet(0.25, 0.0, 0.0, 0.0),XMVectorSet(0,0,0, -1.0f)},	// 四角形の頂点（右上）, UV
+		{ XMVectorSet(0.0f, 0.0f, 0.0f, 0.0f),  XMVectorSet(0.25, 0.5, 0.0, 0.0),XMVectorSet(0,0,0, -1.0f)},	// 四角形の頂点（右下）, UV
+		{ XMVectorSet(1.0f, 0.0f, 0.0f, 0.0f), XMVectorSet(0.0, 0.5, 0.0, 0.0),  XMVectorSet(0,0,0, -1.0f)}	,// 四角形の頂点（左下）, UV
 		//2
-		{ XMVectorSet(0.0f,  1.0f, 0.0f, 0.0f), XMVectorSet(0.25, 0.0, 0.0, 0.0) },	// 四角形の頂点（左上）, UV
-		{ XMVectorSet(0.0f,  1.0f, 1.0f, 0.0f), XMVectorSet(0.5, 0.0, 0.0, 0.0)},	// 四角形の頂点（右上）, UV
-		{ XMVectorSet(0.0f, 0.0f, 1.0f, 0.0f),  XMVectorSet(0.5, 0.5, 0.0, 0.0)},	// 四角形の頂点（右下）, UV
-		{ XMVectorSet(0.0f, 0.0f, 0.0f, 0.0f), XMVectorSet(0.25, 0.5, 0.0, 0.0)},	// 四角形の頂点（左下）, UV
+		{ XMVectorSet(0.0f,  1.0f, 0.0f, 0.0f), XMVectorSet(0.25, 0.0, 0.0, 0.0),XMVectorSet(0,0,0, 1.0f)},	// 四角形の頂点（左上）, UV
+		{ XMVectorSet(0.0f,  1.0f, 1.0f, 0.0f), XMVectorSet(0.5, 0.0, 0.0, 0.0), XMVectorSet(0,0,0, 1.0f)},	// 四角形の頂点（右上）, UV
+		{ XMVectorSet(0.0f, 0.0f, 1.0f, 0.0f),  XMVectorSet(0.5, 0.5, 0.0, 0.0), XMVectorSet(0,0,0, 1.0f)},	// 四角形の頂点（右下）, UV
+		{ XMVectorSet(0.0f, 0.0f, 0.0f, 0.0f), XMVectorSet(0.25, 0.5, 0.0, 0.0), XMVectorSet(0,0,0, 1.0f)},	// 四角形の頂点（左下）, UV
 		//3
-		{ XMVectorSet(1.0f,  1.0f, 1.0f, 0.0f), XMVectorSet(0.5, 0.0, 0.0, 0.0) },	// 四角形の頂点（左上）, UV
-		{ XMVectorSet(0.0f,  1.0f, 1.0f, 0.0f), XMVectorSet(0.75, 0.0, 0.0, 0.0)},	// 四角形の頂点（右上）, UV
-		{ XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f),  XMVectorSet(0.75, 0.5, 0.0, 0.0)},	// 四角形の頂点（右下）, UV
-		{ XMVectorSet(1.0f, 1.0f, 0.0f, 0.0f), XMVectorSet(0.5, 0.5, 0.0, 0.0)},	// 四角形の頂点（左下）, UV
+		{ XMVectorSet(1.0f,  1.0f, 1.0f, 0.0f), XMVectorSet(0.5, 0.0, 0.0, 0.0), XMVectorSet(-1.0,0,0, 0.0f) },	// 四角形の頂点（左上）, UV
+		{ XMVectorSet(0.0f,  1.0f, 1.0f, 0.0f), XMVectorSet(0.75, 0.0, 0.0, 0.0),XMVectorSet(-1.0,0,0, 0.0f)},	// 四角形の頂点（右上）, UV
+		{ XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f),  XMVectorSet(0.75, 0.5, 0.0, 0.0),XMVectorSet(-1.0,0,0, 0.0f)},	// 四角形の頂点（右下）, UV
+		{ XMVectorSet(1.0f, 1.0f, 0.0f, 0.0f), XMVectorSet(0.5, 0.5, 0.0, 0.0),  XMVectorSet(-1.0,0,0, 0.0f)},	// 四角形の頂点（左下）, UV
 		//4
-		{ XMVectorSet(1.0f,  0.0f, 0.0f, 0.0f), XMVectorSet(0.75, 0.0, 0.0, 0.0) },	// 四角形の頂点（左上）, UV
-		{ XMVectorSet(0.0f,  0.0f, 0.0f, 0.0f), XMVectorSet(1.0, 0.0, 0.0, 0.0)},	// 四角形の頂点（右上）, UV
-		{ XMVectorSet(0.0f, 0.0f, 1.0f, 0.0f),  XMVectorSet(1.0, 0.5, 0.0, 0.0)},	// 四角形の頂点（右下）, UV
-		{ XMVectorSet(1.0f, 0.0f, 1.0f, 0.0f), XMVectorSet(0.75, 0.5, 0.0, 0.0)},	// 四角形の頂点（左下）, UV
+		{ XMVectorSet(1.0f,  0.0f, 0.0f, 0.0f), XMVectorSet(0.75, 0.0, 0.0, 0.0),XMVectorSet(1.0,0,0, 0.0f)},	// 四角形の頂点（左上）, UV
+		{ XMVectorSet(0.0f,  0.0f, 0.0f, 0.0f), XMVectorSet(1.0, 0.0, 0.0, 0.0), XMVectorSet(1.0,0,0, 0.0f)},	// 四角形の頂点（右上）, UV
+		{ XMVectorSet(0.0f, 0.0f, 1.0f, 0.0f),  XMVectorSet(1.0, 0.5, 0.0, 0.0), XMVectorSet(1.0,0,0, 0.0f)},	// 四角形の頂点（右下）, UV
+		{ XMVectorSet(1.0f, 0.0f, 1.0f, 0.0f), XMVectorSet(0.75, 0.5, 0.0, 0.0), XMVectorSet(1.0,0,0, 0.0f)},	// 四角形の頂点（左下）, UV
 		//5
-		{ XMVectorSet(1.0f,  1.0f, 1.0f, 0.0f), XMVectorSet(0.0, 0.5, 0.0, 0.0) },	// 四角形の頂点（左上）, UV
-		{ XMVectorSet(1.0f,  1.0f, 0.0f, 0.0f), XMVectorSet(0.25, 0.5, 0.0, 0.0)},	// 四角形の頂点（右上）, UV
-		{ XMVectorSet(1.0f, 0.0f, 0.0f, 0.0f),  XMVectorSet(0.25, 1.0, 0.0, 0.0)},	// 四角形の頂点（右下）, UV
-		{ XMVectorSet(1.0f, 0.0f, 1.0f, 0.0f), XMVectorSet(0.0, 1.0, 0.0, 0.0)},	// 四角形の頂点（左下）, UV
+		{ XMVectorSet(1.0f,  1.0f, 1.0f, 0.0f), XMVectorSet(0.0, 0.5, 0.0, 0.0), XMVectorSet(0,1.0,0, 0.0f) },	// 四角形の頂点（左上）, UV
+		{ XMVectorSet(1.0f,  1.0f, 0.0f, 0.0f), XMVectorSet(0.25, 0.5, 0.0, 0.0),XMVectorSet(0,1.0,0, 0.0f)},	// 四角形の頂点（右上）, UV
+		{ XMVectorSet(1.0f, 0.0f, 0.0f, 0.0f),  XMVectorSet(0.25, 1.0, 0.0, 0.0),XMVectorSet(0,1.0,0, 0.0f)},	// 四角形の頂点（右下）, UV
+		{ XMVectorSet(1.0f, 0.0f, 1.0f, 0.0f), XMVectorSet(0.0, 1.0, 0.0, 0.0),  XMVectorSet(0,1.0,0, 0.0f)},	// 四角形の頂点（左下）, UV
 		//6
-		{ XMVectorSet(0.0f,  1.0f, 1.0f, 0.0f), XMVectorSet(0.25, 0.5, 0.0, 0.0) },	// 四角形の頂点（左上）, UV
-		{ XMVectorSet(1.0f,  1.0f, 1.0f, 0.0f), XMVectorSet(0.5, 0.5, 0.0, 0.0)},	// 四角形の頂点（右上）, UV
-		{ XMVectorSet(1.0f, 0.0f, 1.0f, 0.0f),  XMVectorSet(0.5, 1.0, 0.0, 0.0)},	// 四角形の頂点（右下）, UV
-		{ XMVectorSet(0.0f, 0.0f, 1.0f, 0.0f), XMVectorSet(0.25, 1.0, 0.0, 0.0)},	// 四角形の頂点（左下）, UV
+		{ XMVectorSet(0.0f,  1.0f, 1.0f, 0.0f), XMVectorSet(0.25, 0.5, 0.0, 0.0),XMVectorSet(0,-1.0,0, 0.0f) },	// 四角形の頂点（左上）, UV
+		{ XMVectorSet(1.0f,  1.0f, 1.0f, 0.0f), XMVectorSet(0.5, 0.5, 0.0, 0.0), XMVectorSet(0,-1.0,0, 0.0f)},	// 四角形の頂点（右上）, UV
+		{ XMVectorSet(1.0f, 0.0f, 1.0f, 0.0f),  XMVectorSet(0.5, 1.0, 0.0, 0.0), XMVectorSet(0,-1.0,0, 0.0f)},	// 四角形の頂点（右下）, UV
+		{ XMVectorSet(0.0f, 0.0f, 1.0f, 0.0f), XMVectorSet(0.25, 1.0, 0.0, 0.0), XMVectorSet(0,-1.0,0, 0.0f)},	// 四角形の頂点（左下）, UV
 	};
 
 	// 頂点データ用バッファの設定
@@ -180,6 +180,7 @@ void Quad::Draw(XMMATRIX& worldMatrix)
 
 	CONSTANT_BUFFER cb;
 	cb.matWVP = XMMatrixTranspose(worldMatrix* Camera::GetViewMatrix() * Camera::GetProjectionMatrix());
+	cb.matW = XMMatrixTranspose(worldMatrix);
 
 	D3D11_MAPPED_SUBRESOURCE pdata;
 	Direct3D::pContext->Map(pConstantBuffer_, 0, D3D11_MAP_WRITE_DISCARD, 0, &pdata);	// GPUからのリソースアクセスを一時止める
