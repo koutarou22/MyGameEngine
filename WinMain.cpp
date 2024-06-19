@@ -91,7 +91,9 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, 
             static float rot = 0;
             rot+= 0.02;
             //•`‰æˆ—
+
             XMMATRIX rmat = XMMatrixRotationY(XMConvertToRadians((float)rot));
+            rmat * XMMatrixRotationY(XMConvertToRadians(45.0));
 
             static float factor = 0.0f;
             factor += 0.001;
@@ -105,7 +107,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, 
 
             XMMATRIX tmat = XMMatrixTranslation(2.0*cos(factor),sin(factor), 0);
             
-            mat = /*rmat **/ tmat;
+            mat = rmat /** tmat*/;
             //‚±‚±‚ÉŽ©‘O‚Ì•`‰æˆ—‚ð’Ç‰Á‚µ‚Ä‚¢‚­
             //•`‰æˆ—
             q -> Draw(mat);

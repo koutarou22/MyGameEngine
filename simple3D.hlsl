@@ -5,12 +5,12 @@ Texture2D g_texture : register(t0); //テクスチャー
 SamplerState g_sampler : register(s0); //サンプラー
 
 //───────────────────────────────────────
-// コンスタントバッファ
-// DirectX 側から送信されてくる、ポリゴン頂点以外の諸情報の定義 毎回使う系はここ
+ // コンスタントバッファ
+// DirectX 側から送信されてくる、ポリゴン頂点以外の諸情報の定義
 //───────────────────────────────────────
 cbuffer global
 {
-    //変換行列、視点、
+    //変換行列、視点、光源
     float4x4 matWVP; // ワールド・ビュー・プロジェクションの合成行列
     float4x4 matW;
 };
@@ -26,7 +26,7 @@ struct VS_OUT
 };
 
 //───────────────────────────────────────
-// 頂点シェーダ 
+// 頂点シェーダ
 //───────────────────────────────────────
 VS_OUT VS(float4 pos : POSITION, float4 uv : TEXCOORD, float4 normal : NORMAL)
 {
@@ -37,12 +37,13 @@ VS_OUT VS(float4 pos : POSITION, float4 uv : TEXCOORD, float4 normal : NORMAL)
 	//スクリーン座標に変換し、ピクセルシェーダーへ
     outData.pos = mul(pos, matWVP);
     outData.uv = uv;
-
-    float4 light = float4(-1, 0.5, -0.7, 0);//光源ベクトルの逆ベクトル
-	light = normalize(light);
-	outData.cos_alpha = dot(normal, light);
-
+    
+    float4 light = float4(-10, 0, 0, 0); //光源ベクトルの逆ベクトル
+    light = normalize(light); //単位ベクトル化
+    
     normal = mul(normal, matW);
+    normal = normalize(normal);
+    outData.cos_alpha = clamp(dot(normal, light), 0, 1);
 	//まとめて出力
     return outData;
 }
@@ -52,12 +53,13 @@ VS_OUT VS(float4 pos : POSITION, float4 uv : TEXCOORD, float4 normal : NORMAL)
 //───────────────────────────────────────
 float4 PS(VS_OUT inData) : SV_Target
 {
-   // float4 myUV = { 0.125, 0.25, 0, 0 };
-    float4 Id = { 1.0, 1.0, 1.0, 0 };
+    //return float4(65 / 255.0, 105 / 255.0, 225 / 255.0, 1); //ピクセルを塗る色
+    //float4 myUv = { 0.125, 0.25, 0, 0 };
+    float4 Id = { 1.0, 1.0, 1.0, 1.0 };
     float4 Kd = g_texture.Sample(g_sampler, inData.uv);
     float cos_alpha = inData.cos_alpha;
+    float4 ambentSource = { 0.5, 0.5, 0.5, 1.0 }; //環境光の強さ
     
-    float4 ambentSource = { 0.2, 0.2, 0.2, 1.0 };//環境光
     return Id * Kd * cos_alpha + Id * Kd * ambentSource;
-    
+   // return g_texture.Sample(g_sampler, myUv);
 }

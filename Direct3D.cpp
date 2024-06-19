@@ -134,9 +134,64 @@ void Direct3D::Release()
 HRESULT Direct3D::InitShader()
 {
     HRESULT hr;
+
+    ////3D用のシェーダー　ここから
+    //// 頂点シェーダの作成（コンパイル）
+    //ID3DBlob* pCompileVS = nullptr;
+    //D3DCompileFromFile(L"Simple3D.hlsl", nullptr, nullptr, "VS", "vs_5_0", NULL, 0, &pCompileVS, NULL);
+    //assert(pCompileVS != nullptr);
+    //hr = pDevice->CreateVertexShader(pCompileVS->GetBufferPointer(), pCompileVS->GetBufferSize(), NULL, &pVertexShader);
+    ///*hr = E_FAIL;*/
+    //if (FAILED(hr))
+    //{
+    //    MessageBox(NULL, L"頂点シェーダの作成に失敗", L"Error", MB_OK);
+    //    return hr;
+    //}
+    ////頂点インプットレイアウト
+    //D3D11_INPUT_ELEMENT_DESC layout[] = {
+    //    { "POSITION",	0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0,		D3D11_INPUT_PER_VERTEX_DATA, 0 },//位置
+    //    { "TEXCOORD",	0, DXGI_FORMAT_R32G32_FLOAT,	0, sizeof(XMVECTOR) , D3D11_INPUT_PER_VERTEX_DATA, 0 },//UV座標
+    //    { "NORMAL",	0, DXGI_FORMAT_R32G32B32_FLOAT, 0, sizeof(XMVECTOR) * 2 ,	D3D11_INPUT_PER_VERTEX_DATA, 0 },//法線
+    //};
+    //pDevice->CreateInputLayout(layout, 3, pCompileVS->GetBufferPointer(), pCompileVS->GetBufferSize(), &pVertexLayout);
+    ///*hr = E_FAIL;*/
+    //if (FAILED(hr))
+    //{
+    //    MessageBox(NULL, L"頂点インプットレイアウトの作成に失敗", L"Error", MB_OK);
+    //    return hr;
+    //}
+    //SAFE_RELEASE(pCompileVS);
+    //// ピクセルシェーダの作成（コンパイル）
+    //ID3DBlob* pCompilePS = nullptr;
+    //D3DCompileFromFile(L"Simple3D.hlsl", nullptr, nullptr, "PS", "ps_5_0", NULL, 0, &pCompilePS, NULL);
+    //assert(pCompilePS != nullptr);
+    //hr = pDevice->CreatePixelShader(pCompilePS->GetBufferPointer(), pCompilePS->GetBufferSize(), NULL, &pPixelShader);
+    ///*hr = E_FAIL;*/
+    //if (FAILED(hr))
+    //{
+    //    MessageBox(NULL, L"ピクセルシェーダの作成に失敗", L"Error", MB_OK);
+    //    return hr;
+    //}
+    //SAFE_RELEASE(pCompilePS);
+    ////ラスタライザ作成
+    //D3D11_RASTERIZER_DESC rdc = {};
+    //rdc.CullMode = D3D11_CULL_BACK;//多角形の裏側は表示しない『カリング』
+    //rdc.FillMode = D3D11_FILL_SOLID;//多角形の内部を塗りつぶす D3D11_FILL_SOLID //ここでワイヤーフレーム化 D3D11_FILL_WIREFRAME
+    //rdc.FrontCounterClockwise = FALSE;//反時計回りを『表』にするどうか(がfalseなので時計回りが表)
+    //hr = pDevice->CreateRasterizerState(&rdc, &pRasterizerState);
+    ///*hr = E_FAIL;*/
+    //if (FAILED(hr))
+    //{
+    //    MessageBox(NULL, L"ラスタライザの作成に失敗", L"Error", MB_OK);
+    //    return hr;
+    //}
+    ////3D用のシェーダー　ここまで
+
+
+     //2D用のシェーダー　ここから
     // 頂点シェーダの作成（コンパイル）
     ID3DBlob* pCompileVS = nullptr;
-    D3DCompileFromFile(L"Simple3D.hlsl", nullptr, nullptr, "VS", "vs_5_0", NULL, 0, &pCompileVS, NULL);
+    D3DCompileFromFile(L"Simple2D.hlsl", nullptr, nullptr, "VS", "vs_5_0", NULL, 0, &pCompileVS, NULL);
     assert(pCompileVS != nullptr);
     hr = pDevice->CreateVertexShader(pCompileVS->GetBufferPointer(), pCompileVS->GetBufferSize(), NULL, &pVertexShader);
     /*hr = E_FAIL;*/
@@ -150,10 +205,10 @@ HRESULT Direct3D::InitShader()
     D3D11_INPUT_ELEMENT_DESC layout[] = {
         { "POSITION",	0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0,		D3D11_INPUT_PER_VERTEX_DATA, 0 },//位置
         { "TEXCOORD",	0, DXGI_FORMAT_R32G32_FLOAT,	0, sizeof(XMVECTOR) , D3D11_INPUT_PER_VERTEX_DATA, 0 },//UV座標
-        { "NORMAL",	0, DXGI_FORMAT_R32G32B32_FLOAT, 0, sizeof(XMVECTOR) * 2 ,	D3D11_INPUT_PER_VERTEX_DATA, 0 },//法線
     };
-    pDevice->CreateInputLayout(layout, 3, pCompileVS->GetBufferPointer(), pCompileVS->GetBufferSize(), &pVertexLayout);
+    pDevice->CreateInputLayout(layout, 2, pCompileVS->GetBufferPointer(), pCompileVS->GetBufferSize(), &pVertexLayout);
     /*hr = E_FAIL;*/
+
     if (FAILED(hr))
     {
         MessageBox(NULL, L"頂点インプットレイアウトの作成に失敗", L"Error", MB_OK);
@@ -164,7 +219,7 @@ HRESULT Direct3D::InitShader()
 
     // ピクセルシェーダの作成（コンパイル）
     ID3DBlob* pCompilePS = nullptr;
-    D3DCompileFromFile(L"Simple3D.hlsl", nullptr, nullptr, "PS", "ps_5_0", NULL, 0, &pCompilePS, NULL);
+    D3DCompileFromFile(L"Simple2D.hlsl", nullptr, nullptr, "PS", "ps_5_0", NULL, 0, &pCompilePS, NULL);
     assert(pCompilePS != nullptr);
     hr = pDevice->CreatePixelShader(pCompilePS->GetBufferPointer(), pCompilePS->GetBufferSize(), NULL, &pPixelShader);
     /*hr = E_FAIL;*/
@@ -187,12 +242,21 @@ HRESULT Direct3D::InitShader()
         MessageBox(NULL, L"ラスタライザの作成に失敗", L"Error", MB_OK);
         return hr;
     }
+    //2D用のシェーダー　ここまで
+
+
+
+
+
 
     //それぞれをデバイスコンテキストにセット
     pContext->VSSetShader(pVertexShader, NULL, 0);	//頂点シェーダー
     pContext->PSSetShader(pPixelShader, NULL, 0);	//ピクセルシェーダー
     pContext->IASetInputLayout(pVertexLayout);	//頂点インプットレイアウト
     pContext->RSSetState(pRasterizerState);		//ラスタライザー
+
+    
+
 
     return S_OK;
 }
