@@ -4,9 +4,12 @@
 #include <DirectXMath.h>
 #include "Direct3D.h"
 #include "Texture.h"
+#include "Transform.h"
+
 
 
 using namespace DirectX;
+using std::vector;
 
 
 struct CONSTANT_BUFFER
@@ -35,8 +38,8 @@ class Sprite
 public:
 	Sprite();//コンストラクタ
 	~Sprite();//デストラクタ
-    HRESULT Initialize();//初期化用
-	void Draw(XMMATRIX& worldMatrix);//描画関数
+    HRESULT Load(std::string fileName);//初期化用
+	void Draw(Transform & transform);//描画関数
 	void Release();//解放処理
 private:
 	void InitVertexDate();
@@ -47,7 +50,7 @@ private:
 
 	HRESULT CreateConstantBuffr();
 
-	HRESULT LoadTexture();
+	HRESULT LoadTexture(std::string fileName);
 
 	void PassDateToCB(DirectX::XMMATRIX& worldMatrix);
 	void SetBuffrToPipeline();

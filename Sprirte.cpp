@@ -1,6 +1,9 @@
 #include "Sprite.h"
 #include "Camera.h"
+#include<filesystem>
 using namespace Direct3D;
+
+namespace std::filesystem;
 
 HRESULT hr;
 Sprite::Sprite()
@@ -11,6 +14,11 @@ Sprite::Sprite()
 Sprite::~Sprite()
 {
 	Release();
+}
+
+HRESULT Sprite::Load(std::string fileName)
+{
+	return E_NOTIMPL;
 }
 
 HRESULT Sprite::Initialize()
@@ -124,8 +132,9 @@ HRESULT Sprite::Initialize()
 	return S_OK;
 }
 
-void Sprite::Draw(XMMATRIX& worldMatrix)
+void Sprite::Draw(Transform& transform)
 {
+	transform.Calclation();
 	////コンスタントバッファに渡す情報
 	//XMVECTOR position = { 0, 3, -10, 0 };	//カメラの位置
 	//XMVECTOR target = { 0, 0, 0, 0 };	//カメラの焦点
@@ -192,31 +201,33 @@ HRESULT Sprite::CreateVertexDate()
 
 void Sprite::InitIndexDate()
 {
-	
+	indices_ = { 0,2,3,0,1,2 };
+	indexNum_ = indices_
 
 }
 
 HRESULT Sprite::CreateIndexBuffer()
 {
-	//// 頂点データ用バッファの設定
-   D3D11_BUFFER_DESC bd_vertex;
-   bd_vertex.ByteWidth = sizeof(VERTEX)* vertexNum_;
-   bd_vertex.Usage = D3D11_USAGE_DEFAULT;
-   bd_vertex.BindFlags = D3D11_BIND_VERTEX_BUFFER;
-   bd_vertex.CPUAccessFlags = 0;
-   bd_vertex.MiscFlags = 0;
-   bd_vertex.StructureByteStride = 0;
-   D3D11_SUBRESOURCE_DATA data_vertex;
-   data_vertex.pSysMem = vertices_.date();//配列のアドレスをゲットして代入
-   hr = Direct3D::pDevice->CreateBuffer(&bd_vertex, &data_vertex, &pVertexBuffer_);
-/*hr = E_FAIL;*/
-   if (FAILED(hr))
-   {
-	MessageBox(NULL, L"頂点バッファの作成に失敗", L"Error", MB_OK);
-	return hr;
-   }
+	D3D11_BUFFER_DESC   bd;
+	bd.Usage = D3D11_USAGE_DEFAULT;
+	bd.ByteWidth = sizeof(int)*indices_;
+	bd.BindFlags = D3D11_BIND_INDEX_BUFFER;
+	bd.CPUAccessFlags = 0;
+	bd.MiscFlags = 0;
 
-   return S_OK;
+	D3D11_SUBRESOURCE_DATA InitData;
+	InitData.pSysMem = indices_.data();
+	InitData.SysMemPitch = 0;
+	InitData.SysMemSlicePitch = 0;
+	hr = Direct3D::pDevice->CreateBuffer(&bd, &InitData, &pIndexBuffer_);
+
+	/*hr = E_FAIL;*/
+	if (FAILED(hr))
+	{
+		MessageBox(NULL, L"インデックスバッファの作成に失敗", L"Error", MB_OK);
+		return hr;
+	}
+	return S_OK;
 
 }
 

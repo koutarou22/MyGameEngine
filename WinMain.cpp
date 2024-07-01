@@ -3,6 +3,8 @@
 #include "Direct3D.h"
 #include "Quad.h"
 #include "Camera.h"
+#include "Sprite.h"
+#include "Transform.h"
 
 using namespace Direct3D;
 
@@ -60,6 +62,10 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, 
    HRESULT hr =  Direct3D::Initialize(winW, winH, hWnd);
    Camera::Initialize();
 
+   std::string textureDate("Assets\\dice.png");
+   Sprite * pSprite;
+   pSprite = new Sprite();
+   hr = pSprite->Load(textureDate);
     Quad* q = new Quad;
     q->Initialize();
 
@@ -88,6 +94,9 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, 
             //ƒQ[ƒ€‚Ìˆ—
             Direct3D::BeginDraw();
 
+            Transform trs;
+            trs.rotate_.z += 45;
+            pSprite->Draw(trs);
             static float rot = 0;
             rot+= 0.02;
             //•`‰æˆ—

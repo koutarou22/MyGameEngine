@@ -18,6 +18,11 @@ namespace Direct3D
     ID3D11InputLayout* pVertexLayout = nullptr;  	    //頂点インプットレイアウト
     ID3D11RasterizerState* pRasterizerState = nullptr;	//ラスタライザー
 
+    struct SHADER_BUNDLE
+    {
+
+    };
+
 }
 //初期化
 HRESULT Direct3D::Initialize(int winW, int winH, HWND hWnd)
@@ -244,18 +249,11 @@ HRESULT Direct3D::InitShader()
     }
     //2D用のシェーダー　ここまで
 
-
-
-
-
-
     //それぞれをデバイスコンテキストにセット
     pContext->VSSetShader(pVertexShader, NULL, 0);	//頂点シェーダー
     pContext->PSSetShader(pPixelShader, NULL, 0);	//ピクセルシェーダー
     pContext->IASetInputLayout(pVertexLayout);	//頂点インプットレイアウト
     pContext->RSSetState(pRasterizerState);		//ラスタライザー
-
-    
 
 
     return S_OK;
