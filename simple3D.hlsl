@@ -38,12 +38,11 @@ VS_OUT VS(float4 pos : POSITION, float4 uv : TEXCOORD, float4 normal : NORMAL)
     outData.pos = mul(pos, matWVP);
     outData.uv = uv;
     
-    float4 light = float4(-10, 0, 0, 0); //光源ベクトルの逆ベクトル
+    float4 light = float4(1, 1, 1, 0); //光源ベクトルの逆ベクトル
     light = normalize(light); //単位ベクトル化
     
     normal = mul(normal, matW);
-    normal = normalize(normal);
-    outData.cos_alpha = clamp(dot(normal, light), 0, 1);
+    outData.cos_alpha = dot(normal, light);
 	//まとめて出力
     return outData;
 }

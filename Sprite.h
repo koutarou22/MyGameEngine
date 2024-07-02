@@ -38,7 +38,8 @@ class Sprite
 public:
 	Sprite();//コンストラクタ
 	~Sprite();//デストラクタ
-    HRESULT Load(std::string fileName);//初期化用
+    HRESULT Load(std::string fileName);
+
 	void Draw(Transform & transform);//描画関数
 	void Release();//解放処理
 private:

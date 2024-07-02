@@ -62,12 +62,17 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, 
    HRESULT hr =  Direct3D::Initialize(winW, winH, hWnd);
    Camera::Initialize();
 
-   std::string textureDate("Assets\\dice.png");
-   Sprite * pSprite;
-   pSprite = new Sprite();
+   //std::string textureDate("Assets\\dice.png");
+   //Sprite * pSprite;
+   //pSprite = new Sprite();
+   //hr = pSprite->Load(textureDate);
+   // Quad* q = new Quad;
+   // q->Initialize();
+
+   std::string textureDate("Assets//dice.png");
+   Sprite* pSprite;
+   pSprite = new Sprite;
    hr = pSprite->Load(textureDate);
-    Quad* q = new Quad;
-    q->Initialize();
 
     if (FAILED(hr))
     {
@@ -93,40 +98,18 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, 
             Camera::Update();
             //ƒQ[ƒ€‚Ìˆ—
             Direct3D::BeginDraw();
-
+    /*        XMMATRIX mat = XMMatrixScaling(1 / 2.0f, 1/2.0f, 1.0f);*/
             Transform trs;
-            trs.rotate_.z += 45;
+            /*trs.rotate_.y += 1;
+            trs.position_.x = trs.position_.x + 0.1;*/
             pSprite->Draw(trs);
-            static float rot = 0;
-            rot+= 0.02;
-            //•`‰æˆ—
-
-            XMMATRIX rmat = XMMatrixRotationY(XMConvertToRadians((float)rot));
-            rmat * XMMatrixRotationY(XMConvertToRadians(45.0));
-
-            static float factor = 0.0f;
-            factor += 0.001;
-            //float scale = 1.5 + sin(factor);
-            //XMMATRIX smat = XMMatrixScaling(scale, scale, scale);
-
-            //XMMATRIX mat = smat * rmat;
-
-            //’PˆÊs—ñ‚ÍA”Žš‚Ì‚P‚Æ“¯‚¶
-            XMMATRIX mat = XMMatrixIdentity();
-
-            XMMATRIX tmat = XMMatrixTranslation(2.0*cos(factor),sin(factor), 0);
-            
-            mat = rmat /** tmat*/;
-            //‚±‚±‚ÉŽ©‘O‚Ì•`‰æˆ—‚ð’Ç‰Á‚µ‚Ä‚¢‚­
-            //•`‰æˆ—
-            q -> Draw(mat);
             
             
             Direct3D::EndDraw();
         }
     }
 
-    SAFE_DELETE(q);
+    //SAFE_DELETE(q);
     Direct3D::Release();
 
 	return 0;

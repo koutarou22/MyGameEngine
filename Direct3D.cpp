@@ -2,8 +2,6 @@
 #include "Direct3D.h"
 #include "Quad.h"
 
-using namespace Direct3D;
-
 //変数
 namespace Direct3D
 {
@@ -13,17 +11,18 @@ namespace Direct3D
     IDXGISwapChain* pSwapChain;		      //スワップチェイン
     ID3D11RenderTargetView* pRenderTargetView;	    //レンダーターゲットビュー
 
-    ID3D11VertexShader* pVertexShader = nullptr;	    //頂点シェーダー
-    ID3D11PixelShader* pPixelShader = nullptr;		    //ピクセルシェーダー
-    ID3D11InputLayout* pVertexLayout = nullptr;  	    //頂点インプットレイアウト
-    ID3D11RasterizerState* pRasterizerState = nullptr;	//ラスタライザー
-
     struct SHADER_BUNDLE
     {
-
+        ID3D11VertexShader* pVertexShader = nullptr;	    //頂点シェーダー
+        ID3D11PixelShader* pPixelShader = nullptr;		    //ピクセルシェーダー
+        ID3D11InputLayout* pVertexLayout = nullptr;  	    //頂点インプットレイアウト
+        ID3D11RasterizerState* pRasterizerState = nullptr;	//ラスタライザー
     };
 
+    SHADER_BUNDLE shaderBundle[SHADER_MAX];
 }
+using namespace Direct3D;
+
 //初期化
 HRESULT Direct3D::Initialize(int winW, int winH, HWND hWnd)
 {
@@ -123,10 +122,10 @@ void Direct3D::EndDraw()
 
 void Direct3D::Release()
 {
-    SAFE_RELEASE(pRasterizerState);
+  /*  SAFE_RELEASE(pRasterizerState);
     SAFE_RELEASE(pVertexLayout);
     SAFE_RELEASE(pPixelShader);
-    SAFE_RELEASE(pVertexShader);
+    SAFE_RELEASE(pVertexShader);*/
 
     //解放処理
     SAFE_RELEASE(pRenderTargetView);
