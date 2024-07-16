@@ -1,23 +1,19 @@
 #pragma once
 #include <vector>
-#include"vector"
 #include <DirectXMath.h>
 #include "Direct3D.h"
 #include "Texture.h"
 #include "Transform.h"
 
-
-
 using namespace DirectX;
 using std::vector;
 
-
-struct CONSTANT_BUFFER
+struct CONSTANT_BUFFER2D
 {
 	XMMATRIX	matW;
 };
 
-struct VERTEX
+struct VERTEX2D
 {
 	XMVECTOR position;
 	XMVECTOR uv;
@@ -26,7 +22,7 @@ struct VERTEX
 class Sprite
 {
 	uint64_t vertexNum_;//頂点数
-	vector<VERTEX> vertices_;
+	vector<VERTEX2D> vertices_;
 	uint64_t indexNum_;//頂点数
 	vector<int> indices_;
 	ID3D11Buffer* pVertexBuffer_;	//頂点バッファ
@@ -49,12 +45,12 @@ private:
 	void InitIndexDate();
 	HRESULT CreateIndexBuffer();
 
-	HRESULT CreateConstantBuffr();
+	HRESULT CreateConstantBuffer();
 
 	HRESULT LoadTexture(std::string fileName);
 
-	void PassDateToCB(DirectX::XMMATRIX& worldMatrix);
-	void SetBuffrToPipeline();
+	void PassDateToCB(DirectX::XMMATRIX worldMatrix);
+	void SetBufferToPipeline();
 
 };
 

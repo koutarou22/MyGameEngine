@@ -3,8 +3,10 @@
 #include "Direct3D.h"
 #include "Quad.h"
 #include "Camera.h"
-#include "Sprite.h"
+//#include "Sprite.h"
 #include "Transform.h"
+#include "Fbx.h"
+//#include "Dice.h"
 
 using namespace Direct3D;
 
@@ -62,17 +64,23 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, 
    HRESULT hr =  Direct3D::Initialize(winW, winH, hWnd);
    Camera::Initialize();
 
+   Fbx fbx;
+   fbx.Load("Assets\\oden2.fbx");
+
    //std::string textureDate("Assets\\dice.png");
    //Sprite * pSprite;
    //pSprite = new Sprite();
    //hr = pSprite->Load(textureDate);
-   // Quad* q = new Quad;
-   // q->Initialize();
+    //Quad* q = new Quad;
+    //q->Initialize();
+  /*  Dice* d = new Dice;
+    d->Initialize();
 
    std::string textureDate("Assets//dice.png");
    Sprite* pSprite;
-   pSprite = new Sprite;
-   hr = pSprite->Load(textureDate);
+   pSprite = new Sprite;*/
+   /*hr = pSprite->Load(textureDate);*/
+   Fbx* f = new Fbx;
 
     if (FAILED(hr))
     {
@@ -100,10 +108,11 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, 
             Direct3D::BeginDraw();
     /*        XMMATRIX mat = XMMatrixScaling(1 / 2.0f, 1/2.0f, 1.0f);*/
             Transform trs;
-            /*trs.rotate_.y += 1;
-            trs.position_.x = trs.position_.x + 0.1;*/
-            pSprite->Draw(trs);
+            trs.rotate_.y += 1;
+            trs.position_.x = trs.position_.x + 0.1;
+           /* d->Draw(trs);*/
             
+            f->Draw(trs);
             
             Direct3D::EndDraw();
         }

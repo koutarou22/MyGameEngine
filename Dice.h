@@ -7,8 +7,8 @@ class Dice :
 {
 
 public:
-	Dice();
+	Dice() :Quad() {};
 	~Dice();
-	virtual HRESULT Initialize();
-	virtual void Draw(Transform &transform);
+	void InitVertexDate() override;
+	void InitIndexDate() override;
 };

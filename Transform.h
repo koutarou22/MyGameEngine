@@ -11,7 +11,6 @@ class Transform
 	XMMATRIX matScale_;	//拡大行列
 	//ワールドマトリクスは、この３つを欠けたもの　SRT
 
-
 public:
 	XMFLOAT3 position_;	//位置
 	XMFLOAT3 rotate_;	//向き
@@ -24,8 +23,10 @@ public:
 	~Transform();
 
 	//各行列の計算
-	void Calclation();
+	void Calculation();
 
 	//ワールド行列を取得
 	XMMATRIX GetWorldMatrix();
+
+	XMMATRIX GetNormalMatrix();
 };

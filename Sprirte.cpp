@@ -4,7 +4,7 @@
 using namespace Direct3D;
 
 
-HRESULT hr;
+
 Sprite::Sprite()
 	:pTexture_(nullptr), pVertexBuffer_(nullptr), pIndexBuffer_(nullptr), pConstantBuffer_(nullptr),vertexNum_(0),indexNum_(0)
 {
@@ -17,6 +17,7 @@ Sprite::~Sprite()
 
 HRESULT Sprite::Load(std::string fileName)
 {
+
 	InitVertexDate();
 	if (FAILED(CreateVertexDate()))
 	{
@@ -29,7 +30,7 @@ HRESULT Sprite::Load(std::string fileName)
 		return E_FAIL;
 	}
 
-	if (FAILED(CreateConstantBuffr()))
+	if (FAILED(CreateConstantBuffer()))
 	{
 		return E_FAIL;
 	}
@@ -44,9 +45,9 @@ HRESULT Sprite::Load(std::string fileName)
 
 void Sprite::Draw(Transform& transform)
 {
-	transform.Calclation();
+	transform.Calculation();
 	PassDateToCB(transform.GetWorldMatrix());
-	SetBuffrToPipeline();
+	SetBufferToPipeline();
 	Direct3D::pContext->DrawIndexed(6, 0, 0);//三角化した時の頂点の数
 }
 
@@ -73,8 +74,9 @@ void Sprite::InitVertexDate()
 
 HRESULT Sprite::CreateVertexDate()
 {
+	HRESULT hr;
 	D3D11_BUFFER_DESC bd_vertex;
-	bd_vertex.ByteWidth = sizeof(VERTEX) * vertexNum_;
+	bd_vertex.ByteWidth = sizeof(VERTEX2D) * vertexNum_;
 	bd_vertex.Usage = D3D11_USAGE_DEFAULT;
 	bd_vertex.BindFlags = D3D11_BIND_VERTEX_BUFFER;
 	bd_vertex.CPUAccessFlags = 0;
@@ -127,11 +129,11 @@ HRESULT Sprite::CreateIndexBuffer()
 
 }
 
-HRESULT Sprite::CreateConstantBuffr()
+HRESULT Sprite::CreateConstantBuffer()
 {
 	//コンスタントバッファ作成
 	D3D11_BUFFER_DESC cb;
-	cb.ByteWidth = sizeof(CONSTANT_BUFFER);
+	cb.ByteWidth = sizeof(CONSTANT_BUFFER2D);
 	cb.Usage = D3D11_USAGE_DYNAMIC;
 	cb.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
 	cb.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
@@ -154,7 +156,7 @@ HRESULT Sprite::LoadTexture(std::string filename)
 
 	namespace fs = std::filesystem;
 	pTexture_ = new Texture;
-	assert(fs::is_regular_file(filename));
+	/*assert(fs::is_regular_file(filename));*/
 
 	HRESULT hr;
 	hr = pTexture_->Load(filename);
@@ -166,9 +168,9 @@ HRESULT Sprite::LoadTexture(std::string filename)
 	return S_OK;
 }
 
-void Sprite::PassDateToCB(DirectX::XMMATRIX& worldMatrix)
+void Sprite::PassDateToCB(DirectX::XMMATRIX worldMatrix)
 {
-	CONSTANT_BUFFER cb;
+	CONSTANT_BUFFER2D cb;
 	/*cb.matW = XMMatrixTranspose(worldMatrix * Camera::GetViewMatrix() * Camera::GetProjectionMatrix());*/
 	cb.matW = XMMatrixTranspose(worldMatrix);
 
@@ -176,13 +178,11 @@ void Sprite::PassDateToCB(DirectX::XMMATRIX& worldMatrix)
 	Direct3D::pContext->Map(pConstantBuffer_, 0, D3D11_MAP_WRITE_DISCARD, 0, &pdata);	// GPUからのリソースアクセスを一時止める
 	memcpy_s(pdata.pData, pdata.RowPitch, (void*)(&cb), sizeof(cb));
 	Direct3D::pContext->Unmap(pConstantBuffer_, 0);
-
-	
 }
 
-void Sprite::SetBuffrToPipeline()
+void Sprite::SetBufferToPipeline()
 {
-	UINT stride = sizeof(VERTEX);
+	UINT stride = sizeof(VERTEX2D);
 	UINT offset = 0;
 	Direct3D::pContext->IASetVertexBuffers(0, 1, &pVertexBuffer_, &stride, &offset);
 
@@ -200,7 +200,4 @@ void Sprite::SetBuffrToPipeline()
 
 	ID3D11ShaderResourceView* pSRV = pTexture_->GetSRV();
 	Direct3D::pContext->PSSetShaderResources(0, 1, &pSRV);
-
-
-	
 }
