@@ -1,5 +1,9 @@
 #include "Fbx.h"
 #include "Camera.h"
+#include <filesystem>
+
+namespace fs = std::filesystem;
+
 
 Fbx::Fbx()
 	:pVertexBuffer_(nullptr),pIndexBuffer_(nullptr),pConstantBuffer_(nullptr), vertexCount_(-1),
@@ -31,10 +35,25 @@ HRESULT Fbx::Load(std::string fileName)
 	polygonCount_ = mesh->GetPolygonCount();	//ポリゴンの数
 	materialCount_ = pNode->GetMaterialCount();
 
+	////現在のカレントディレクトリを覚えておく
+	//●●●●●●●●●●●●●●●●●●●●●●●●●
+	
+	//	●●●●●●●●●●●●●●●●●●●●●●●●●●●
+
+	//	//引数のfileNameからディレクトリ部分を取得
+	char dir[MAX_PATH];
+	//●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
+
+	//	//カレントディレクトリ変更
+	//	●●●●●●●●●●●●●●●●
+
 	InitVertex(mesh);		//頂点バッファ準備
 	InitIndex(mesh);
 	InitConstantBuffer();
 	InitMaterial(pNode);
+
+	//カレントディレクトリを元に戻す
+	//●●●●●●●●●●●●●●●●●●●●●●
 
 	//マネージャ解放
 	pFbxManager->Destroy();
@@ -60,8 +79,23 @@ void Fbx::InitMaterial(fbxsdk::FbxNode* pNode)
 		{
 			FbxFileTexture* textureInfo = lProperty.GetSrcObject<FbxFileTexture>(0);
 			const char* textureFilePath = textureInfo->GetRelativeFileName();
-			int k = 0;
-			k++;
+			fs::path texFile(textureFilePath);
+		/*	if (fs::is_regular_file(texFile))
+			{
+				int i;
+				i++;
+			}*/
+			if (fs::is_regular_file(texFile))
+			{
+				Texture* tmp = new Texture;
+				pMaterialList_[i].pTexture = new Texture;
+				pMaterialList_[i].pTexture->Load(texFile.string());
+			}
+			else
+			{
+				//Error
+			}
+			
 		}
 
 		//テクスチャ無し
@@ -167,7 +201,6 @@ void Fbx::InitConstantBuffer()
 		MessageBox(NULL, L"コンスタントバッファの作成に失敗しました", L"エラー", MB_OK);
 	}
 }
-
 
 void Fbx::Draw(Transform& transform)
 {
