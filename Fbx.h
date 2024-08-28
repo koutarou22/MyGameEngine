@@ -1,21 +1,20 @@
 #pragma once
-
-#include <d3d11.h>
+#include "Direct3D.h"
 #include <fbxsdk.h>
 #include <DirectXMath.h>
-#include "Direct3D.h"
 #include "Texture.h"
 #include "Transform.h"
 #include <vector>
-#include <fileSystem>
+#include <filesystem>
+#include "Texture.h"
 
+//#pragma comment(lib, "LibFbxSDK-MD.lib")
 #pragma comment(lib, "LibFbxSDK-MD.lib")
 #pragma comment(lib, "LibXml2-MD.lib")
 #pragma comment(lib, "zlib-MD.lib")
 
-class Fbx
+class FBX
 {
-	//マテリアル
 	struct MATERIAL
 	{
 		Texture* pTexture;
@@ -31,24 +30,26 @@ class Fbx
 	struct VERTEX
 	{
 		XMVECTOR position;
-		//XMVECTOR uv;
+		XMVECTOR uv;
 		//XMVECTOR normal; //ノーマル追加（法線ベクトル）
 	};
 
 	ID3D11Buffer* pVertexBuffer_; //頂点バッファ用メモリ 
-	ID3D11Buffer* pIndexBuffer_; //インデックスバッファ用メモリ
+	ID3D11Buffer** pIndexBuffer_; //インデックスバッファ用メモリ
 	ID3D11Buffer* pConstantBuffer_; //コンスタントバッファ用メモリ
-	std::vector<MATERIAL> pMaterialList_;
+	std::vector<MATERIAL> pMaterialList_; //マテリアルの配列
+	std::vector<int> indexCount_;//マテリアルごとのインデックス数
+
 	int vertexCount_;	//頂点数
 	int polygonCount_;	//ポリゴン数
-	int materialCount_;	//マテリアルの個数
+	int materialCount_; //マテリアル数
 
 	void InitVertex(fbxsdk::FbxMesh* mesh);
 	void InitIndex(fbxsdk::FbxMesh* mesh);
 	void InitConstantBuffer();
 	void InitMaterial(fbxsdk::FbxNode* pNode);
 public:
-	Fbx();
+	FBX();
 	HRESULT Load(std::string fileName);
 	void    Draw(Transform& transform);
 	void    Release();

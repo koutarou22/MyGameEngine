@@ -1,19 +1,19 @@
 #include <Windows.h>
 #include<tchar.h>
 #include "Direct3D.h"
-#include "Quad.h"
+//#include "Quad.h"
 #include "Camera.h"
 //#include "Sprite.h"
 #include "Transform.h"
-#include "Fbx.h"
+#include "FBX.h"
 //#include "Dice.h"
 
 using namespace Direct3D;
 
 const wchar_t * WIN_CLASS_NAME = L"SampleGame";
 const wchar_t* APP_NAME = L"Error";
-const int WINDOW_WIDTH = 800;  //ウィンドウの幅
-const int WINDOW_HEIGHT = 600; //ウィンドウの高さ
+//const int WINDOW_WIDTH = 800;  //ウィンドウの幅
+//const int WINDOW_HEIGHT = 600; //ウィンドウの高さ
 
 //プロトタイプ宣言
 LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
@@ -37,7 +37,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, 
     RegisterClassEx(&wc); //クラスを登録
 
     //ウィンドウサイズの計算(表示領域をWINDOW_WIDTH x WINDOW_HEIGHTに指定するための計算)
-    RECT winRect = { 0, 0, WINDOW_WIDTH, WINDOW_HEIGHT };
+    RECT winRect = { 0, 0,  Direct3D::WINDOW_WIDTH, Direct3D::WINDOW_HEIGHT };
     AdjustWindowRect(&winRect, WS_OVERLAPPEDWINDOW, FALSE);
     int winW = winRect.right - winRect.left;     //ウィンドウ幅
     int winH = winRect.bottom - winRect.top;     //ウィンドウ高さ
@@ -64,7 +64,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, 
    HRESULT hr =  Direct3D::Initialize(winW, winH, hWnd);
    Camera::Initialize();
 
-   Fbx fbx;
+   FBX fbx;
    fbx.Load("Assets\\oden2.fbx");
 
    //std::string textureDate("Assets\\dice.png");
@@ -80,7 +80,6 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, 
    Sprite* pSprite;
    pSprite = new Sprite;*/
    /*hr = pSprite->Load(textureDate);*/
-   Fbx* f = new Fbx;
 
     if (FAILED(hr))
     {
@@ -106,13 +105,13 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, 
             Camera::Update();
             //ゲームの処理
             Direct3D::BeginDraw();
-    /*        XMMATRIX mat = XMMatrixScaling(1 / 2.0f, 1/2.0f, 1.0f);*/
+   
             Transform trs;
-            trs.rotate_.y += 1;
-            trs.position_.x = trs.position_.x + 0.1;
-           /* d->Draw(trs);*/
+          /*
+            trs.position_.z = -8.5;
+            trs.position_.y = 2.5;*/
             
-            f->Draw(trs);
+            fbx.Draw(trs);
             
             Direct3D::EndDraw();
         }

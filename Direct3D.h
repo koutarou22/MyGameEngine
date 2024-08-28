@@ -18,7 +18,6 @@ namespace Direct3D
 {
 	extern ID3D11Device* pDevice;
 	extern ID3D11DeviceContext* pContext;
-
 	//初期化
 	HRESULT Initialize(int winW, int winH, HWND hWnd);
 
@@ -28,15 +27,14 @@ namespace Direct3D
 	
 	void SetShader(SHADER_TYPE type);
 
-	//シェーダー準備
-	HRESULT InitShader();
-
-	//描画開始
 	void BeginDraw();
 
-	//描画終了
 	void EndDraw();
 
-	//解放
 	void Release();
+
+	extern ID3D11Device* pDevice;
+	extern ID3D11DeviceContext* pContext;
+	extern const int WINDOW_WIDTH;
+	extern const int WINDOW_HEIGHT;
 };

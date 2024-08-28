@@ -1,9 +1,9 @@
 #include "Camera.h"
 
-//変数
 
 namespace Camera
 {
+	//変数
 	XMVECTOR position_;	//カメラの位置（視点）
 	XMVECTOR target_;	//見る位置（焦点）
 	XMMATRIX viewMatrix_;	//ビュー行列
@@ -20,6 +20,15 @@ void Camera::Initialize()
 	projMatrix_ = XMMatrixPerspectiveFovLH(XM_PIDIV4, (FLOAT)800 / (FLOAT)600, 0.1f, 100.0f);
 }
 
+void Camera::Initialize(XMVECTOR _position, XMVECTOR _target)
+{
+	position_ = _position;	//カメラの位置
+	target_ = _target;	//カメラの焦点
+
+	//プロジェクション行列
+	projMatrix_ = XMMatrixPerspectiveFovLH(XM_PIDIV4, (FLOAT)800 / (FLOAT)600, 0.1f, 100.0f);
+}
+
 void Camera::Update()
 {
 	//ビュー行列の作成
@@ -28,23 +37,19 @@ void Camera::Update()
 
 void Camera::SetPosition(XMVECTOR position)
 {
-	 //position_ = position;
-	position = position_;
+	position_ = position;
 }
 
 void Camera::SetTarget(XMVECTOR target)
 {
-	//target_ = target;
-	target = target_;
+	target_ = target;
 }
 
-//ビュー行列を取得
 XMMATRIX Camera::GetViewMatrix()
 {
 	return viewMatrix_;
 }
 
-//プロジェクション行列を取得
 XMMATRIX Camera::GetProjectionMatrix()
 {
 	return projMatrix_;

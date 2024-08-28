@@ -12,7 +12,7 @@ cbuffer global
 {
     //変換行列、視点、光源
     float4x4 matWVP; // ワールド・ビュー・プロジェクションの合成行列
-    float4x4 matW;
+    float4x4 matW; //法線をワールド座標に対応させる行列＝回転＊スケールの逆行列（平行移動は無視）
 };
 
 //───────────────────────────────────────
@@ -38,11 +38,15 @@ VS_OUT VS(float4 pos : POSITION, float4 uv : TEXCOORD, float4 normal : NORMAL)
     outData.pos = mul(pos, matWVP);
     outData.uv = uv;
     
-    float4 light = float4(1, 1, 1, 0); //光源ベクトルの逆ベクトル
+    float4 light = float4(1, 1, -1, 0); //光源ベクトルの逆ベクトル
     light = normalize(light); //単位ベクトル化
     
     normal = mul(normal, matW);
-    outData.cos_alpha = dot(normal, light);
+    normal = normalize(normal);
+    normal.w = 0;
+    light.w = 0;
+    
+    outData.cos_alpha = clamp(dot(normal, light), 0, 1);
 	//まとめて出力
     return outData;
 }
@@ -52,13 +56,11 @@ VS_OUT VS(float4 pos : POSITION, float4 uv : TEXCOORD, float4 normal : NORMAL)
 //───────────────────────────────────────
 float4 PS(VS_OUT inData) : SV_Target
 {
-    //return float4(65 / 255.0, 105 / 255.0, 225 / 255.0, 1); //ピクセルを塗る色
-    //float4 myUv = { 0.125, 0.25, 0, 0 };
-    float4 Id = { 1.0, 1.0, 1.0, 1.0 };
+    float4 Id = { 1.0, 1.0, 1.0, 0.0 };
     float4 Kd = g_texture.Sample(g_sampler, inData.uv);
     float cos_alpha = inData.cos_alpha;
-    float4 ambentSource = { 0.5, 0.5, 0.5, 1.0 }; //環境光の強さ
+    float4 ambentSource = { 0.3, 0.3, 0.3, 0.0 }; //環境光の強さ
     
-    return Id * Kd * cos_alpha + Id * Kd * ambentSource;
-   // return g_texture.Sample(g_sampler, myUv);
+    //return Id * Kd * cos_alpha + Id * Kd * ambentSource;
+    return g_texture.Sample(g_sampler, inData.uv);
 }
