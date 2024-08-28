@@ -85,7 +85,6 @@ void FBX::InitVertex(fbxsdk::FbxMesh* mesh)
 		}
 	}
 	// 頂点バッファ作成
-	//（自分でやって）
 	//頂点バッファ
 	HRESULT hr;
 	D3D11_BUFFER_DESC bd_vertex;

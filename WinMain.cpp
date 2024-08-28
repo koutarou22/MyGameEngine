@@ -1,12 +1,14 @@
+//インクルード
 #include <Windows.h>
-#include<tchar.h>
 #include "Direct3D.h"
+
 //#include "Quad.h"
 #include "Camera.h"
+//
+//#include "Dice.h"
 //#include "Sprite.h"
 #include "Transform.h"
 #include "FBX.h"
-//#include "Dice.h"
 
 using namespace Direct3D;
 
@@ -107,9 +109,9 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, 
             Direct3D::BeginDraw();
    
             Transform trs;
-          /*
+          
             trs.position_.z = -8.5;
-            trs.position_.y = 2.5;*/
+            trs.position_.y = 2.5;
             
             fbx.Draw(trs);
             
