@@ -11,7 +11,7 @@ SamplerState g_sampler : register(s0); //サンプラー
 cbuffer global
 {
     //変換行列、視点、光源
-    float4x4 matWVP;
+    float4x4 matW; //ワールド行列
 };
 
 //───────────────────────────────────────
@@ -21,7 +21,6 @@ struct VS_OUT
 {
     float4 pos : SV_POSITION; //位置
     float2 uv : TEXCOORD; //UV座標
-   
 };
 
 //───────────────────────────────────────
@@ -34,10 +33,10 @@ VS_OUT VS(float4 pos : POSITION, float4 uv : TEXCOORD)
 
 	//ローカル座標に、ワールド・ビュー・プロジェクション行列をかけて
 	//スクリーン座標に変換し、ピクセルシェーダーへ
-    outData.pos = mul(pos, matWVP);
+    outData.pos = mul(pos, matW);
     outData.uv = uv;
     
-	//まとめて出力)
+	//まとめて出力
     return outData;
 }
 

@@ -67,7 +67,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, 
    Camera::Initialize();
 
    FBX fbx;
-   fbx.Load("Assets\\oden2.fbx");
+   fbx.Load("Assets\\oden3.fbx");
 
    //std::string textureDate("Assets\\dice.png");
    //Sprite * pSprite;
@@ -109,10 +109,13 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, 
             Direct3D::BeginDraw();
    
             Transform trs;
-          
+            static float rot = 0;
             trs.position_.z = -8.5;
             trs.position_.y = 2.5;
             
+            trs.rotate_.y = rot;
+            rot += 0.01;
+
             fbx.Draw(trs);
             
             Direct3D::EndDraw();
