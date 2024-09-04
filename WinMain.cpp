@@ -1,19 +1,15 @@
 //インクルード
 #include <Windows.h>
-#include "Direct3D.h"
+#include "Engine/Direct3D.h"
+#include "Engine/Camera.h"
 
-//#include "Quad.h"
-#include "Camera.h"
-//
-//#include "Dice.h"
-//#include "Sprite.h"
-#include "Transform.h"
-#include "FBX.h"
+#pragma comment(lib,"d3d11.lib")
 
 using namespace Direct3D;
 
 const wchar_t * WIN_CLASS_NAME = L"SampleGame";
 const wchar_t* APP_NAME = L"Error";
+
 //const int WINDOW_WIDTH = 800;  //ウィンドウの幅
 //const int WINDOW_HEIGHT = 600; //ウィンドウの高さ
 
@@ -61,36 +57,19 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, 
 
     ShowWindow(hWnd, nCmdShow);
 
-
     //Direct3D初期化
    HRESULT hr =  Direct3D::Initialize(winW, winH, hWnd);
    Camera::Initialize();
 
-   FBX fbx;
- /*  fbx.Load("Assets\\oden3.fbx");*/
+   //FBX fbx;
+   //fbx.Load("Assets\\GreenBox.fbx");
+   ////GreenBox.fbx
 
-   fbx.Load("Assets\\GreenBox.fbx");
-   //GreenBox.fbx
-
-   //std::string textureDate("Assets\\dice.png");
-   //Sprite * pSprite;
-   //pSprite = new Sprite();
-   //hr = pSprite->Load(textureDate);
-    //Quad* q = new Quad;
-    //q->Initialize();
-  /*  Dice* d = new Dice;
-    d->Initialize();
-
-   std::string textureDate("Assets//dice.png");
-   Sprite* pSprite;
-   pSprite = new Sprite;*/
-   /*hr = pSprite->Load(textureDate);*/
-
-    if (FAILED(hr))
-    {
-        MessageBox(NULL, L"Direct3Dの初期化に失敗しました", L"Error", NULL);
-        return hr;
-    }
+   // if (FAILED(hr))
+   // {
+   //     MessageBox(NULL, L"Direct3Dの初期化に失敗しました", L"Error", NULL);
+   //     return hr;
+   // }
 
     MSG msg;
     ZeroMemory(&msg, sizeof(msg));
@@ -110,22 +89,14 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, 
             Camera::Update();
             //ゲームの処理
             Direct3D::BeginDraw();
-   
-            Transform trs;
-            static float rot = 0;
-            trs.position_.z = -8.5;
-            trs.position_.y = 2.5;
-            
-            trs.rotate_.y = rot;
-            rot += 0.01;
 
-            fbx.Draw(trs);
+            //ここにゲームの処理
             
+            //描画の終了処理
             Direct3D::EndDraw();
         }
     }
 
-    //SAFE_DELETE(q);
     Direct3D::Release();
 
 	return 0;

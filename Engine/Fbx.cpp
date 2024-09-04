@@ -65,7 +65,7 @@ void FBX::InitVertex(fbxsdk::FbxMesh* mesh)
 	//VERTEX* vertices = new VERTEX[vertexCount_];
 	std::vector<VERTEX> vertices(vertexCount_);
 	//全ポリゴン
-	for (DWORD poly = 0; poly < polygonCount_; poly++)
+	for (DWORD poly = 0; poly < (DWORD)polygonCount_; poly++)
 	{
 		//3頂点分
 		for (int vertex = 0; vertex < 3; vertex++)
@@ -121,7 +121,7 @@ void FBX::InitIndex(fbxsdk::FbxMesh* mesh)
 		int count = 0;
 		//全ポリゴン
 		//index.clear();
-		for (DWORD poly = 0; poly < polygonCount_; poly++)
+		for (DWORD poly = 0; poly < (DWORD)polygonCount_; poly++)
 		{
 			FbxLayerElementMaterial* mtl = mesh->GetLayer(0)->GetMaterials();
 			int mtlId = mtl->GetIndexArray().GetAt(poly);
