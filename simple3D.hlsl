@@ -65,7 +65,7 @@ float4 PS(VS_OUT inData) : SV_Target
     
     if(isTexture == false)
     {
-        return Id *diffuseColor* cos_alpha + Id * diffusuColor * ambentSource;
+        return Id *diffuseColor* cos_alpha + Id /** diffusuColor*/ * ambentSource;
     }
     else
     {

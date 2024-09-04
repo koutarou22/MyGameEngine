@@ -67,7 +67,10 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, 
    Camera::Initialize();
 
    FBX fbx;
-   fbx.Load("Assets\\oden3.fbx");
+ /*  fbx.Load("Assets\\oden3.fbx");*/
+
+   fbx.Load("Assets\\GreenBox.fbx");
+   //GreenBox.fbx
 
    //std::string textureDate("Assets\\dice.png");
    //Sprite * pSprite;
