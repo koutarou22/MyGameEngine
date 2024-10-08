@@ -24,7 +24,6 @@ void Transform::Calculation()
     XMMATRIX rx = XMMatrixRotationX(XMConvertToRadians(rotate_.x));
     XMMATRIX ry = XMMatrixRotationY(XMConvertToRadians(rotate_.y));
     XMMATRIX rz = XMMatrixRotationZ(XMConvertToRadians(rotate_.z));
-
     matRotate_ = rz * rx * ry;
 
     matScale_ = XMMatrixScaling(scale_.x, scale_.y, scale_.z);
@@ -32,7 +31,15 @@ void Transform::Calculation()
 
 XMMATRIX Transform::GetWorldMatrix()
 {
-    return matScale_ * matRotate_ * matTranslate_;
+    if (pParent_ != nullptr)
+    {
+        return matScale_ * matRotate_ * matTranslate_ * pParent_->GetWorldMatrix();
+        //return matScale_ * matRotate_ * matTranslate_ * êeÇÃSTR;
+    }
+    else
+    {
+        return matScale_ * matRotate_ * matTranslate_;
+    }
 }
 
 XMMATRIX Transform::GetNormalMatrix()

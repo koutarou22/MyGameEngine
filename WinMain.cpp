@@ -1,14 +1,20 @@
 //インクルード
 #include <Windows.h>
+#include <stdlib.h>
 #include "Engine/Direct3D.h"
 #include "Engine/Camera.h"
+#include "Engine/Fbx.h"
+#include "Engine/RootJob.h"
 
+#pragma comment(lib, "winmm.lib")
 #pragma comment(lib,"d3d11.lib")
 
 using namespace Direct3D;
 
 const wchar_t * WIN_CLASS_NAME = L"SampleGame";
 const wchar_t* APP_NAME = L"Error";
+
+RootJob* pRootJob = nullptr;
 
 //const int WINDOW_WIDTH = 800;  //ウィンドウの幅
 //const int WINDOW_HEIGHT = 600; //ウィンドウの高さ
@@ -61,9 +67,13 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, 
    HRESULT hr =  Direct3D::Initialize(winW, winH, hWnd);
    Camera::Initialize();
 
+   pRootJob = new RootJob;
+   pRootJob->Initialize();
    //FBX fbx;
-   //fbx.Load("Assets\\GreenBox.fbx");
-   ////GreenBox.fbx
+   //Player* player;
+ /*  fbx.Load("Assets\\GreenBox.fbx");*/
+    //fbx.Load("Assets\\oden3.fbx");
+   //GreenBox.fbx
 
    // if (FAILED(hr))
    // {
@@ -85,18 +95,31 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, 
         //メッセージなし
         else
         {
+  
             //カメラを更新
             Camera::Update();
+            //ルートジョブからつながるすべてのオブジェクトをUpdateする
+            pRootJob->Update();
+
             //ゲームの処理
             Direct3D::BeginDraw();
 
+            pRootJob->Draw();
+
+    /*        Transform trs;
+            trs.position_.z = -5;
+            trs.position_.y = +1;
+            trs.scale_.x = 3.0;
+            trs.scale_.y = 3.0;
+
+            trs.position_.y += 1;*/
             //ここにゲームの処理
-            
+  /*          fbx.Draw(trs);*/
             //描画の終了処理
             Direct3D::EndDraw();
         }
     }
-
+    pRootJob->Release();
     Direct3D::Release();
 
 	return 0;
