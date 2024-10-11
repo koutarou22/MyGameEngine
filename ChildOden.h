@@ -1,8 +1,10 @@
 #pragma once
 #include "Engine//GameObject.h"
+#include "Engine/Fbx.h"
 class ChildOden :
     public GameObject
 {
+    FBX* pFbx;
 public:
     //コンストラクタ
     ChildOden (GameObject* parent);

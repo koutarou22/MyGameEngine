@@ -15,7 +15,7 @@
     <Filter Include="ヘッダー ファイル\Engine">
       <UniqueIdentifier>{1f589127-4fcc-4f19-aec9-d20995e5bd0c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\Shader">
+    <Filter Include="ソース ファイル\Engine\Shader">
       <UniqueIdentifier>{3be1a69f-1359-4ccd-8c32-0a4d36cd45d8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -63,6 +63,12 @@
     <ClCompile Include="Engine\RootJob.cpp">
       <Filter>ソース ファイル\Engine</Filter>
     </ClCompile>
+    <ClCompile Include="Engine\SceneManager.cpp">
+      <Filter>ソース ファイル\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Model.cpp">
+      <Filter>ソース ファイル\Engine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Camera.h">
@@ -107,13 +113,16 @@
     <ClInclude Include="Engine\RootJob.h">
       <Filter>ヘッダー ファイル\Engine</Filter>
     </ClInclude>
+    <ClInclude Include="Model.h">
+      <Filter>ヘッダー ファイル\Engine</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Engine\Simple2D.hlsl">
-      <Filter>ソース ファイル\Shader</Filter>
+      <Filter>ソース ファイル\Engine\Shader</Filter>
     </FxCompile>
     <FxCompile Include="Engine\Simple3D.hlsl">
-      <Filter>ソース ファイル\Shader</Filter>
+      <Filter>ソース ファイル\Engine\Shader</Filter>
     </FxCompile>
   </ItemGroup>
 </Project>
