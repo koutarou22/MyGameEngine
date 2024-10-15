@@ -25,8 +25,24 @@ public:
 	void DrawSub();
 	void ReleaseSub();
 
+	void SetPosition(XMFLOAT3 position)
+	{
+		transform_.position_ = position;
+	}
+	void SetPosition(float x, float y, float z)
+	{
+		SetPosition(XMFLOAT3(x, y, z));
+	}
+
 	void KillMe();
 
+	void SetScale(float sx, float sy, float sz)
+	{
+		transform_.scale_ = { sx,sy,sz };
+	}
+	void SetRotateX(float xrotate) { transform_.rotate_.x = xrotate; }
+	void SetRotateY(float yrotate) { transform_.rotate_.y = yrotate; };
+	void SetRotateZ(float zrotate) { transform_.rotate_.z = zrotate; };
 	//template <typename T>//クラスならclassとかく　ほぼ同じ
 	template <class T> //tポインタ型　仮引数のクラスに合わせた引数
 	T* Instantiate(GameObject* pParent)

@@ -4,7 +4,8 @@
 class ChildOden :
     public GameObject
 {
-    FBX* pFbx;
+   /* FBX* pFbx;*/
+    int hModel;
 public:
     //コンストラクタ
     ChildOden (GameObject* parent);

@@ -8,6 +8,7 @@
 #include "PlayScene.h"
 #include "Player.h"
 #include "Engine/Input.h"
+#include"Model.h"
 
 #pragma comment(lib, "winmm.lib")
 #pragma comment(lib,"d3d11.lib")
@@ -100,23 +101,24 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, 
         //メッセージなし
         else
         {
-
+           /* Input::Update();*/
             //カメラを更新
             Camera::Update();
 
             //入力の処理
-        /*    Input::Update();*/
+          
             pRootJob->UpdateSub();
 
             //▼描画
             Direct3D::BeginDraw();
-
+      
             //ルートジョブから、すべてのオブジェクトのドローを呼ぶ
             pRootJob->DrawSub();
             FBX* fbx;
             Direct3D::EndDraw();
         }
     }
+    Model::Release();
     pRootJob->Release();
     Direct3D::Release();
 

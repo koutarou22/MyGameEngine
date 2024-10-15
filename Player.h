@@ -1,10 +1,12 @@
 #pragma once
 #include"Engine//GameObject.h"
 #include"Engine//Fbx.h"
+class FBX;
 class Player :
     public GameObject
 {
-	FBX* pFbx;
+	//FBX* pFbx;
+    int hModel;
 public:
 
 	//コンストラクタ
