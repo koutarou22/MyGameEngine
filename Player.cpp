@@ -25,7 +25,7 @@ void Player::Initialize()
 
 void Player::Update()
 {
-	transform_.rotate_.y += 0.03f;
+	transform_.rotate_.y += 0.01f;
 	if (Input::IsKey(DIK_A)) {
 		transform_.position_.x -= 0.001f;
 	}
@@ -48,5 +48,5 @@ void Player::Draw()
 
 void Player::Release()
 {
-	Model::Release();
+	/*pFbx->Release();*/
 }

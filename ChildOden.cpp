@@ -41,6 +41,6 @@ void ChildOden::Draw()
 
 void ChildOden::Release()
 {
-	Model::Release();
+	/*Model::Release();*/
 	/*pFbx->Release();*/
 }
