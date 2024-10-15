@@ -71,6 +71,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, 
     //Direct3D初期化
    HRESULT hr =  Direct3D::Initialize(winW, winH, hWnd);
    Camera::Initialize();
+   Input::Initialize(hWnd);
 
 
 
@@ -101,7 +102,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, 
         //メッセージなし
         else
         {
-           /* Input::Update();*/
+            Input::Update();
             //カメラを更新
             Camera::Update();
 

@@ -14,9 +14,9 @@ void ChildOden::Initialize()
 	Model::Load("Assets/Oden3.fbx");
 	//pFbx = new FBX;
 	/*pFbx->Load("Assets/Oden3.fbx");*/
-	transform_.scale_.x = 1.2;
-	transform_.scale_.y = 1.2;
-	transform_.scale_.z = 1.2;
+	transform_.scale_.x = 2.2;
+	transform_.scale_.y = 2.2;
+	transform_.scale_.z = 2.2;
 	/*transform_.position_.x = 1.0;
 	transform_.position_.y = 1.0;*/
 	transform_.position_.z = -1.0;
@@ -24,6 +24,13 @@ void ChildOden::Initialize()
 
 void ChildOden::Update()
 {
+	transform_.rotate_.y += 1.0f;
+	transform_.position_.y += 0.01f;
+
+	if (transform_.position_.y > 5.0f)
+	{
+		KillMe();
+	}
 }
 
 void ChildOden::Draw()
@@ -34,5 +41,6 @@ void ChildOden::Draw()
 
 void ChildOden::Release()
 {
+	Model::Release();
 	/*pFbx->Release();*/
 }

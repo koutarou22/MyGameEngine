@@ -44,7 +44,7 @@ void Model::Release()
 	bool isRefered = false;
 	for (int j = 0; j < modelList.size(); j++)
 	{
-		for (int i = j+1; i < modelList.size(); i++)//全部やっちゃダメ、0以上からスタートしないといけない　対象がない
+		for (int i = j+1; i < modelList.size(); i++)//全部やっちゃダメ、0以上からスタートしないといけない　対象がない為
 		{
 			if (modelList[j]->pFbx_ == modelList[i]->pFbx_)
 			{
