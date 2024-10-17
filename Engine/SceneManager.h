@@ -4,7 +4,9 @@
 //ゲームに登場するシーン
 enum SCENE_ID
 {
-	SCENE_ID_PLAY = 0,
+	SCENE_ID_TEST = 0,
+	SCENE_ID_PLAY,
+	SCENE_ID_MAX,
 };
 
 //-----------------------------------------------------------
@@ -25,7 +27,10 @@ public:
 
 	//シーン切り替え（実際に切り替わるのはこの次のフレーム）
 	//引数：next	次のシーンのID
-	void ChangeScene(SCENE_ID next);
+	void ChangeScene(SCENE_ID next)
+	{
+		nextSceneID_ = next;
+	}
 
 private:
 	SCENE_ID currentSceneID_;	//現在のシーン

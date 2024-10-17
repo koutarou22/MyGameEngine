@@ -1,5 +1,5 @@
 #include "SceneManager.h"
-#include "../PlayScene.h"
+#include "../TestScene.h"
 
 SceneManager::SceneManager(GameObject* parent)
 	: GameObject(parent, "SceneManager")
@@ -8,9 +8,9 @@ SceneManager::SceneManager(GameObject* parent)
 
 void SceneManager::Initialize()
 {
-	currentSceneID_ = SCENE_ID_PLAY;
+	currentSceneID_ = SCENE_ID_TEST;
 	nextSceneID_ = currentSceneID_;
-	Instantiate<PlayScene>(this);
+	Instantiate<TestScene>(this);
 }
 
 void SceneManager::Update()
@@ -21,7 +21,7 @@ void SceneManager::Update()
 		//Ÿ‚ÌƒV[ƒ“‚ğì¬
 		switch (nextSceneID_)
 		{
-		case SCENE_ID_PLAY: Instantiate<PlayScene>(this); break;
+		case SCENE_ID_PLAY: Instantiate<TestScene>(this); break;
 
 		}
 		currentSceneID_ = nextSceneID_;
@@ -33,9 +33,5 @@ void SceneManager::Draw()
 }
 
 void SceneManager::Release()
-{
-}
-
-void SceneManager::ChangeScene(SCENE_ID next)
 {
 }
