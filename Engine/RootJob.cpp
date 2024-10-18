@@ -1,8 +1,8 @@
 #include "RootJob.h"
 #include "SceneManager.h"
 
-RootJob::RootJob()
-	:GameObject(nullptr, "RootObject")
+RootJob::RootJob(GameObject*parent)
+	:GameObject(parent, "RootJob")
 {
 }
 

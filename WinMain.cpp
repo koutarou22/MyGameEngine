@@ -75,7 +75,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, 
 
 
 
-   pRootJob = new RootJob;
+   pRootJob = new RootJob(nullptr);
    pRootJob->Initialize();
    FBX fbx;
 
