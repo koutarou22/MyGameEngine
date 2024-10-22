@@ -23,12 +23,11 @@ void SceneManager::Update()
 	{
 		//そのシーンのオブジェクトを全削除
 		
-		for (auto itr : childList_)
-		{
-			itr->ReleaseSub();
-			SAFE_DELETE(itr);
-			childList_.clear();
-		}
+		auto Scene = childList_.begin();
+		(*Scene)->ReleaseSub();
+		SAFE_DELETE(*Scene);
+		childList_.clear();
+
 		Model::Release();
 		//次のシーンを作成
 		switch (nextSceneID_)

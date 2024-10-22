@@ -71,16 +71,9 @@ void GameObject::KillMe()
 
 GameObject* GameObject::FindObject(string objName)//‚±‚±‚ª–¢Š®¬
 {
-	for (auto itr : childList_)
-	{
-		GameObject* obj = itr->FindChildObject(objName);
-		if (obj != nullptr)
-		{
-			return obj;
-		}
-
-	}
-	return nullptr;
+	GameObject* rootJob = GetRootJob();
+	GameObject* res = rootJob->FindChildObject(objName);
+	return(res);
 }
 
 GameObject* GameObject::GetRootJob()
