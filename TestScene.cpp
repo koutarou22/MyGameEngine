@@ -12,7 +12,7 @@ void TestScene::Initialize()
 
 void TestScene::Update()
 {
-	if (Input::IsKey(DIK_SPACE))
+	if (Input::IsKey(DIK_P))
 	{
 		SceneManager* pSceneManager = (SceneManager*)FindObject("SceneManager");
 		pSceneManager->ChangeScene(SCENE_ID_PLAY);

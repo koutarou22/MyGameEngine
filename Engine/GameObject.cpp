@@ -25,20 +25,16 @@ void GameObject::Release()
 void GameObject::UpdateSub()
 {
 	Update();
-
-
-	for (auto itr = childList_.begin(); itr != childList_.end(); itr++)
+	for (auto itr : childList_)
 	{
-		(*itr)->UpdateSub();
+		itr->UpdateSub();
 	}
-
 	for (auto itr = childList_.begin(); itr != childList_.end();)
 	{
-		if ((*itr)->isDead_ == true)
-		{
+		if ((*itr)->isDead_) {
 			(*itr)->ReleaseSub();
-			SAFE_DELETE(*itr);//©•ª©g‚ğÁ‚·
-			itr = childList_.erase(itr);//ƒŠƒXƒg‚©‚ç‚àíœ
+			SAFE_DELETE(*itr);
+			itr = childList_.erase(itr);
 		}
 		else
 		{

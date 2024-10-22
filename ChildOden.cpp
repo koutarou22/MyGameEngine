@@ -1,6 +1,6 @@
 #include "ChildOden.h"
 #include"Model.h"
-
+#include"Enemy.h"
 ChildOden::ChildOden(GameObject* parent)
 {
 }
@@ -27,7 +27,22 @@ void ChildOden::Update()
 	transform_.rotate_.y += 1.0f;
 	transform_.position_.y += 0.01f;
 
-	if (transform_.position_.y > 5.0f)
+	Enemy* pEnemy = (Enemy*)FindObject("Enemy");
+	float r1 = 0.1;
+	float r2 = 0.5;
+
+	XMFLOAT3 P1 = pEnemy->GetPosition();
+	XMFLOAT3 P2 = transform_.position_;
+
+	XMVECTOR Dist = XMVector3Length(XMVectorSet(P1.x, P1.y, P1.z, 1) - XMVectorSet(P2.x, P2.y, P2.z, 1));
+	float d = XMVectorGetX(Dist);
+
+	if (d <= r1 + r2)
+	{
+		KillMe();
+	}
+
+	if (transform_.position_.y > 3.8f)
 	{
 		KillMe();
 	}
@@ -41,6 +56,6 @@ void ChildOden::Draw()
 
 void ChildOden::Release()
 {
-	/*Model::Release();*/
+	//Model::Release();
 	/*pFbx->Release();*/
 }

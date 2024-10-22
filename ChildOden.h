@@ -24,5 +24,7 @@ public:
 
     //ŠJ•ú
     void Release() override;
+
+    XMFLOAT3 GetPosition() { return(transform_.position_); }
 };
 

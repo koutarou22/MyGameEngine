@@ -1,18 +1,16 @@
 #pragma once
-#include"Engine//GameObject.h"
-#include"Engine//Fbx.h"
-class FBX;
-class Player :
+#include "Engine/GameObject.h"
+class Enemy :
     public GameObject
 {
-	//FBX* pFbx;
+private:
     int hModel;
 public:
+    //コンストラクタ
+   Enemy(GameObject* parent);
 
-	//コンストラクタ
-	Player(GameObject* parent);
     //デストラクタ
-    ~Player();
+    ~Enemy();
 
     //初期化
     void Initialize() override;
@@ -26,6 +24,6 @@ public:
     //開放
     void Release() override;
 
- 
+    XMFLOAT3 GetPosition() { return transform_.position_; }
 };
 
