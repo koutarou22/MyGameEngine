@@ -55,6 +55,7 @@ public:
 	void AddCollider(SphereCollider* pCollider);
 	void Collision(GameObject* pTarget);//他の判定を参照
 	void RoundRobin(GameObject* pTarget);
+	virtual void OnCollision(GameObject* pTarget) {};//空を呼ぶのもコストがかかる
 
 	//template <typename T>//クラスならclassとかく　ほぼ同じ
 	template <class T> //tポインタ型　仮引数のクラスに合わせた引数

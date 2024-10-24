@@ -25,6 +25,8 @@ public:
     //ŠJ•ú
     void Release() override;
 
+    void OnCollision(GameObject* pTarget) override;
+
     XMFLOAT3 GetPosition() { return(transform_.position_); }
 };
 

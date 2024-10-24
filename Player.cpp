@@ -32,7 +32,7 @@ void Player::Update()
 	if (Input::IsKey(DIK_D)) {
 		transform_.position_.x += 0.001f;
 	}
-	if (Input::IsKey(DIK_SPACE)) 
+	if (Input::IsKeyDown(DIK_SPACE)) 
 	{
 		GameObject * p = Instantiate<ChildOden>(this);
 		p->SetPosition(transform_.position_);

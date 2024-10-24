@@ -26,14 +26,19 @@ void GameObject::Release()
 void GameObject::UpdateSub()
 {
 	Update();
-	for (auto itr : childList_)
+	RoundRobin(GetRootJob());
+
+	for (auto itr = childList_.begin(); itr != childList_.end(); itr++)
 	{
-		itr->UpdateSub();
+		(*itr)->UpdateSub();
 	}
-	for (auto itr = childList_.begin(); itr != childList_.end();)
+
+	for (auto itr = childList_.begin(); itr != childList_.end(); )
 	{
-		if ((*itr)->isDead_) {
+		if ((*itr)->isDead_)
+		{
 			(*itr)->ReleaseSub();
+			//(*itr)->Release();
 			SAFE_DELETE(*itr);
 			itr = childList_.erase(itr);
 		}
@@ -41,6 +46,7 @@ void GameObject::UpdateSub()
 		{
 			itr++;
 		}
+
 	}
 }
 void GameObject::DrawSub()
@@ -115,16 +121,28 @@ void GameObject::Collision(GameObject* pTarget)//一対一の判定
 	XMVECTOR ta = XMLoadFloat3(&(pTarget->transform_.position_));
 	//自分とターゲットのコライダー同士の当たり判定を描く
 	//this->positionとpTarget->positionの距離 < this->pCollider.radius_+pTarget->pCollider.radius_
-	float dist = XMVectorGetX(XMVector2Length(me - ta));
+	float dist = XMVectorGetX(XMVector3Length(me - ta));
 	float rDist = this->pCollider_->GetRadius() + pTarget->pCollider_->GetRadius();
 	if(dist <= rDist)
 	{
 		//onCollisiong
+		OnCollision(pTarget);
 	}
 }
 
 void GameObject::RoundRobin(GameObject* pTarget)
 {
 	//自分とターゲットの当たり判定
+	if (this->pCollider_ == nullptr)
+		return;
+	if (pTarget->pCollider_ != nullptr)
+		Collision(pTarget);
+	
 	//自分とターゲットの子オブジェクト全部の当たり判定（再帰）
+
+	for (auto& itr : pTarget->childList_)
+	{
+		RoundRobin(itr);
+	}
+
 }

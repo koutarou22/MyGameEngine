@@ -2,6 +2,7 @@
 #include "ChildOden.h"
 #include "Model.h"
 #include "Engine/Input.h"
+#include "SphereCollider.h"
 
 
 Enemy::Enemy(GameObject* parent)
@@ -21,6 +22,8 @@ void Enemy::Initialize()
 	transform_.scale_.x = 0.7;
 	transform_.scale_.y = 0.7;
 	transform_.scale_.z = 0.7;
+	SphereCollider* col = new SphereCollider(0.1f);
+	this->AddCollider(col);
 }
 
 void Enemy::Update()
