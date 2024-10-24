@@ -2,6 +2,7 @@
 #include"Model.h"
 #include"Enemy.h"
 ChildOden::ChildOden(GameObject* parent)
+	      :GameObject(parent, "ChildOden")
 {
 }
 

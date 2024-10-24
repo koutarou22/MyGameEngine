@@ -4,15 +4,17 @@
 #include"Transform.h"
 #include <string>
 
+class SphereCollider;
 using std::string;
 class GameObject
 {
 	bool isDead_; //生死
 protected:
 	std::list<GameObject*>childList_;
-	Transform transform_;
-	GameObject*	pParent_;
-	std::string objectName_;//
+	Transform             transform_;
+	GameObject*	            pParent_;
+	std::string          objectName_;//オブジェクトの名前
+	SphereCollider*       pCollider_;
 
 public:
 	GameObject();
@@ -49,6 +51,10 @@ public:
 	GameObject* FindObject(string objName);
 	GameObject* GetRootJob();
 	GameObject* FindChildObject(string objName);
+
+	void AddCollider(SphereCollider* pCollider);
+	void Collision(GameObject* pTarget);//他の判定を参照
+	void RoundRobin(GameObject* pTarget);
 
 	//template <typename T>//クラスならclassとかく　ほぼ同じ
 	template <class T> //tポインタ型　仮引数のクラスに合わせた引数

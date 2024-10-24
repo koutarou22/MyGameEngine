@@ -1,5 +1,6 @@
 #include "GameObject.h"
 #include "Direct3D.h"
+#include "../SphereCollider.h"
 
 GameObject::GameObject()
 	:pParent_(nullptr)
@@ -7,7 +8,7 @@ GameObject::GameObject()
 }
 
 GameObject::GameObject(GameObject* parent, const std::string& name)
-	:pParent_(parent), objectName_(name), isDead_(false)
+	:pParent_(parent), objectName_(name), isDead_(false),pCollider_(nullptr)
 {
 	if (parent != nullptr) {
 		this->transform_.pParent_ = &(parent->transform_);
@@ -99,4 +100,31 @@ GameObject* GameObject::FindChildObject(string objName)
 		}
 		return nullptr;
 	}
+}
+
+void GameObject::AddCollider(SphereCollider* pCollider)
+{
+	pCollider_ = pCollider;
+}
+
+void GameObject::Collision(GameObject* pTarget)//一対一の判定
+{
+	if (this->pCollider_ == nullptr || pTarget->pCollider_ == nullptr || this == pTarget)
+		return;
+	XMVECTOR me = XMLoadFloat3(&(transform_.position_));
+	XMVECTOR ta = XMLoadFloat3(&(pTarget->transform_.position_));
+	//自分とターゲットのコライダー同士の当たり判定を描く
+	//this->positionとpTarget->positionの距離 < this->pCollider.radius_+pTarget->pCollider.radius_
+	float dist = XMVectorGetX(XMVector2Length(me - ta));
+	float rDist = this->pCollider_->GetRadius() + pTarget->pCollider_->GetRadius();
+	if(dist <= rDist)
+	{
+		//onCollisiong
+	}
+}
+
+void GameObject::RoundRobin(GameObject* pTarget)
+{
+	//自分とターゲットの当たり判定
+	//自分とターゲットの子オブジェクト全部の当たり判定（再帰）
 }
