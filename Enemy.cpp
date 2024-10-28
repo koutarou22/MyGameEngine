@@ -18,11 +18,12 @@ Enemy::~Enemy()
 void Enemy::Initialize()
 {
     hModel = Model::Load("Assets/red.fbx");
+	assert(hModel != -1);
 	transform_.position_.y = 1.8;
 	transform_.scale_.x = 0.7;
 	transform_.scale_.y = 0.7;
 	transform_.scale_.z = 0.7;
-	SphereCollider* col = new SphereCollider(0.1f);
+	SphereCollider* col = new SphereCollider(0.5f);
 	this->AddCollider(col);
 }
 

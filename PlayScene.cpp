@@ -7,6 +7,7 @@
 PlayScene::PlayScene(GameObject* parent)
 	:GameObject(parent,"PlayScene")
 {
+	count = 4000;
 }
 
 PlayScene::~PlayScene()
@@ -21,10 +22,14 @@ void PlayScene::Initialize()
 
 void PlayScene::Update()
 {
-	if (Input::IsKey(DIK_C))
+	if (FindObject("Enemy") == nullptr)
 	{
-		SceneManager* pSceneManager = (SceneManager*)FindObject("SceneManager");
-		pSceneManager->ChangeScene(SCENE_ID_CLEAR);
+		count--;
+ 		if(count <= 0)
+		{
+			SceneManager* pSceneManager = (SceneManager*)FindObject("SceneManager");
+			pSceneManager->ChangeScene(SCENE_ID_CLEAR);
+		}
 	}
 }
 

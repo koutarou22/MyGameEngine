@@ -3,6 +3,7 @@
 class PlayScene :
     public GameObject
 {
+    int count;
 public:
     PlayScene(GameObject* parent);
     ~PlayScene();

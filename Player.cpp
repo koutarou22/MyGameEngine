@@ -21,6 +21,7 @@ void Player::Initialize()
 	this->transform_.scale_.y = 3.0;
 	this->transform_.scale_.z = 3.0;
 	/*Instantiate<ChildOden>(this);*/
+	this->transform_.position_.y = -4.2;
 }
 
 void Player::Update()
