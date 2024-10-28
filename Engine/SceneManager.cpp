@@ -1,8 +1,10 @@
 #include "SceneManager.h"
-#include "../TestScene.h"
+#include "../TitleScene.h"
 #include "../PlayScene.h"
 #include "Direct3D.h"
 #include "../Model.h"
+#include "../TitleScene.h"
+#include "../ClearScene.h"
 
 SceneManager::SceneManager(GameObject* parent)
 	: GameObject(parent, "SceneManager")
@@ -11,9 +13,9 @@ SceneManager::SceneManager(GameObject* parent)
 
 void SceneManager::Initialize()
 {
-	currentSceneID_ = SCENE_ID_TEST;//一番最初に選択されるSceneえ
+	currentSceneID_ = SCENE_ID_TITLE;//一番最初に選択されるScene
 	nextSceneID_ = currentSceneID_;
-	Instantiate<TestScene>(this);
+	Instantiate<TitleScene>(this);
 }
 
 void SceneManager::Update()
@@ -32,9 +34,9 @@ void SceneManager::Update()
 		//次のシーンを作成
 		switch (nextSceneID_)
 		{
-		case SCENE_ID_TEST: Instantiate<TestScene>(this); break;
+		case SCENE_ID_TITLE: Instantiate<TitleScene>(this); break;
 		case SCENE_ID_PLAY: Instantiate<PlayScene>(this); break;
-
+		case SCENE_ID_CLEAR: Instantiate<ClearScene>(this); break;
 		}
 		//無事シーンを生成できたら、カレントシーンを更新
 		currentSceneID_ = nextSceneID_;
