@@ -1,8 +1,10 @@
 #pragma once
-#include "Engine//GameObject.h"
+#include "Engine/GameObject.h"
+#include "Engine/Sprite.h"
 class ClearScene :
     public GameObject
 {
+    Sprite* pSprite;
 public:
     ClearScene(GameObject* parent);
     ~ClearScene();

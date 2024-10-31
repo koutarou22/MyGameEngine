@@ -3,12 +3,15 @@
 #include "Engine/Texture.h";
 #include "Engine/SceneManager.h"
 
+
 TitleScene::TitleScene(GameObject* parent) :GameObject(parent, "TitleScene"), hImage_(-1)
 {
 }
 
 void TitleScene::Initialize()
 {
+	pSprite = new Sprite;
+	pSprite->Load("Assets/Title.png");
 }
 
 void TitleScene::Update()
@@ -22,8 +25,10 @@ void TitleScene::Update()
 
 void TitleScene::Draw()
 {
+	pSprite->Draw(transform_);
 }
 
 void TitleScene::Release()
 {
+	pSprite->Release();
 }

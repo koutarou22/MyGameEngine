@@ -10,6 +10,8 @@ ClearScene::ClearScene(GameObject* parent) :GameObject(parent, "ClearScene")
 
 void ClearScene::Initialize()
 {
+	pSprite = new Sprite;
+	pSprite->Load("Assets/Clear.png");
 }
 
 void ClearScene::Update()
@@ -24,8 +26,10 @@ void ClearScene::Update()
 
 void ClearScene::Draw()
 {
+	pSprite->Draw(transform_);
 }
 
 void ClearScene::Release()
 {
+	pSprite->Release();
 }

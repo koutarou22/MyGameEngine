@@ -1,9 +1,11 @@
 #pragma once
 #include "Engine//GameObject.h"
-class TitleScene :
-    public GameObject
+#include "Engine/Sprite.h"
+
+class TitleScene : public GameObject
 {
     int hImage_;
+    Sprite* pSprite;
 public:
     TitleScene(GameObject* parent);
     void Initialize() override;
@@ -11,4 +13,3 @@ public:
     void Draw() override;
     void Release() override;
 };
-
