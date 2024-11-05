@@ -5,6 +5,7 @@
 #include "../Model.h"
 #include "../TitleScene.h"
 #include "../ClearScene.h"
+#include "../GameOverScene.h"
 
 SceneManager::SceneManager(GameObject* parent)
 	: GameObject(parent, "SceneManager")
@@ -37,6 +38,7 @@ void SceneManager::Update()
 		case SCENE_ID_TITLE: Instantiate<TitleScene>(this); break;
 		case SCENE_ID_PLAY: Instantiate<PlayScene>(this); break;
 		case SCENE_ID_CLEAR: Instantiate<ClearScene>(this); break;
+		case SCENE_ID_GAMEOVER:Instantiate<GameOverScene>(this); break;
 		}
 		//無事シーンを生成できたら、カレントシーンを更新
 		currentSceneID_ = nextSceneID_;

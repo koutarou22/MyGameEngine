@@ -9,7 +9,7 @@
 Enemy::Enemy(GameObject* parent)
     :GameObject(parent, "Enemy")/*, pFbx(nullptr)*/, hModel(-1)
 {
-	count = 4000;
+	count = 2000;
 }
 
 Enemy::~Enemy()
@@ -20,7 +20,7 @@ void Enemy::Initialize()
 {
     hModel = Model::Load("Assets/red.fbx");
 	assert(hModel != -1);
-	transform_.position_.y = 1.8;
+	transform_.position_.y = 1.9;
 	transform_.scale_.x = 0.7;
 	transform_.scale_.y = 0.7;
 	transform_.scale_.z = 0.7;
@@ -36,13 +36,18 @@ void Enemy::Update()
 	static float sn = sin(ntime);
 	transform_.position_.x = 4.0 * sin(ntime);
 
-	count--;
-	if (count <= 0)
-	{
-		GameObject* p = Instantiate<Bullet>(this);
-		p->SetPosition(transform_.position_);
-		p->SetScale(2.2, 2.2, 2.2);
-	}
+    if (count > 0)
+    {
+        count--;
+        if (count == 0)
+        {
+            GameObject* e= Instantiate<Bullet>(this);
+            e->SetPosition(transform_.position_);
+            e->SetScale(1.0, 1.0, 1.0);
+
+            count = 2000;
+        }
+    }
 }
 
 void Enemy::Draw()

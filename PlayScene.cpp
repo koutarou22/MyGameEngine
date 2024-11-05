@@ -31,6 +31,15 @@ void PlayScene::Update()
 			pSceneManager->ChangeScene(SCENE_ID_CLEAR);
 		}
 	}
+	if (FindObject("Player") == nullptr)
+	{
+		count--;
+		if (count <= 0)
+		{
+			SceneManager* pSceneManager = (SceneManager*)FindObject("SceneManager");
+			pSceneManager->ChangeScene(SCENE_ID_GAMEOVER);
+		}
+	}
 }
 
 void PlayScene::Draw()

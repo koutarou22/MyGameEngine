@@ -8,12 +8,12 @@ class SphereCollider;
 using std::string;
 class GameObject
 {
-	bool isDead_; //生死
+	bool isDead_;
 protected:
-	std::list<GameObject*>childList_;
+	std::list<GameObject*>childList_;//オブジェクトの名前
 	Transform             transform_;
 	GameObject*	            pParent_;
-	std::string          objectName_;//オブジェクトの名前
+	std::string          objectName_;
 	SphereCollider*       pCollider_;
 
 public:

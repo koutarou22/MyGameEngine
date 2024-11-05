@@ -8,8 +8,6 @@
 using std::vector;
 using namespace DirectX;
 
-
-
 class Sprite
 {
 	//コンスタントバッファー:　アプリ側から、シェーダーに毎フレーム渡したい情報

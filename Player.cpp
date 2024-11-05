@@ -1,6 +1,7 @@
-#include "Player.h"
+#include"Player.h"
 #include"ChildOden.h"
-#include "Engine/Input.h"
+#include"Engine/Input.h"
+#include"SphereCollider.h"
 #include"Model.h"
 Player::Player(GameObject* parent)
 	:GameObject(parent, "Player")/*, pFbx(nullptr)*/,hModel(-1)
@@ -22,15 +23,19 @@ void Player::Initialize()
 	this->transform_.scale_.z = 3.0;
 	/*Instantiate<ChildOden>(this);*/
 	this->transform_.position_.y = -4.2;
+	SphereCollider* col = new SphereCollider(0.5f);
+	this->AddCollider(col);
 }
 
 void Player::Update()
 {
 	transform_.rotate_.y += 0.01f;
-	if (Input::IsKey(DIK_A)) {
+	if (Input::IsKey(DIK_A))
+	{
 		transform_.position_.x -= 0.001f;
 	}
-	if (Input::IsKey(DIK_D)) {
+	if (Input::IsKey(DIK_D)) 
+	{
 		transform_.position_.x += 0.001f;
 	}
 	if (Input::IsKeyDown(DIK_SPACE)) 

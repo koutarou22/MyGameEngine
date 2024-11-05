@@ -4,7 +4,7 @@
 #include"SphereCollider.h"
 #include "Player.h"
 Bullet::Bullet(GameObject* parent)
-	:GameObject(parent, "Bullet")
+	:GameObject(parent, "Bullet"), hModel(-1)
 {
 }
 
@@ -14,25 +14,23 @@ Bullet::~Bullet()
 
 void Bullet::Initialize()
 {
-	Model::Load("Assets/Hot.fbx");
+	hModel = Model::Load("Assets/Oden3.fbx");
 	//pFbx = new FBX;
 	/*pFbx->Load("Assets/Oden3.fbx");*/
-	transform_.scale_.x = 2.2;
-	transform_.scale_.y = 2.2;
-	transform_.scale_.z = 2.2;
 	/*transform_.position_.x = 1.0;
 	transform_.position_.y = 1.0;*/
 	transform_.position_.z = -1.0;
-	SphereCollider* col = new SphereCollider(0.1f);
+	transform_.rotate_.z  = 180.0f;
+	SphereCollider* col = new SphereCollider(0.5f);
 	this->AddCollider(col);
 }
 
 void Bullet::Update()
 {
+	
 	transform_.rotate_.y += 1.0f;
-	transform_.position_.y -= 0.0001f;
+	transform_.position_.y -= 0.01f;
 
-	Player* pPlayer = (Player*)FindObject("Player");
 	//float r1 = 0.1;
 	//float r2 = 0.5;
 
@@ -47,10 +45,10 @@ void Bullet::Update()
 	//	KillMe();
 	//}
 
-	if (transform_.position_.y > -3.8f)
+	/*if (transform_.position_.y < 3.8f)
 	{
 		KillMe();
-	}
+	}*/
 }
 
 void Bullet::Draw()
@@ -67,6 +65,10 @@ void Bullet::Release()
 
 void Bullet::OnCollision(GameObject* pTarget)
 {
-	KillMe();
-	pTarget->KillMe();
+	Player* pPlayer = (Player*)FindObject("Player");
+	if (pPlayer && pTarget == pPlayer)
+	{
+		pPlayer->KillMe();
+		KillMe();
+	}
 }
